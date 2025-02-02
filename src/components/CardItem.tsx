@@ -1,14 +1,13 @@
 import React from 'react';
 import { Card } from 'antd';
-import { PokemonCard } from './CardList';
+import { PokemonCard } from '../types';
+
 
 interface CardItemProps {
     pokemonCard: PokemonCard;
 }
 
 const CardItem: React.FC<CardItemProps> = ({ pokemonCard }) => {
-
-    
 
     return (
         <Card
