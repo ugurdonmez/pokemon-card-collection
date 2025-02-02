@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Spin } from 'antd';
-import CardItem from './CardItem';
+import CardItem from '@components/CardItem';
 import ashCollection from '../data/ash_collection.json';
-import { PokemonCard } from '../types';
+import { PokemonCard } from '@types';
+
 
 const CardList: React.FC = () => {
     const [cards, setCards] = useState<PokemonCard[]>([]);
