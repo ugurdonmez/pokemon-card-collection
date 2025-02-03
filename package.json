@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ugurdonez.github.io/pokemon-card-collection",
+  "homepage": "https://ugurdonmez.github.io/pokemon-card-collection",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "jest",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist --repo https://x-access-token:${GITHUB_TOKEN}@github.com/ugurdonez/pokemon-card-collection.git"
+    "deploy": "gh-pages -d dist --repo https://x-access-token:${GITHUB_TOKEN}@github.com/ugurdonmez/pokemon-card-collection.git"
 
   },
   "dependencies": {
