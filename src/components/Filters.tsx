@@ -35,13 +35,12 @@ const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
     if (name) newParams.set("name", name);
     else newParams.delete("name");
   
-    // ✅ Only update URL if values have changed
     if (newParams.toString() !== searchParams.toString()) {
       setSearchParams(newParams, { replace: true });
     }
   
     onFilterChange({ rarity, cardType, pokemonType, hpRange, name });
-  }, [rarity, cardType, pokemonType, hpRange, name]); // ✅ Removed `setSearchParams` and `onFilterChange` from deps
+  }, [rarity, cardType, pokemonType, hpRange, name]);
   
   return (
     <div className="filters-container">
