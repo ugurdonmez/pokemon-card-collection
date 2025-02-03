@@ -11,13 +11,16 @@ const PokemonCardListView: React.FC = () => {
     const fetchCards = async () => {
       dispatch(setLoading(true)); // Start Loading
 
-      // Simulating API call with a delay
-      setTimeout(() => {
-        import('../data/ash_collection.json').then((data) => {
-          setCards(data.default);
-          dispatch(setLoading(false)); // Stop Loading
-        });
-      }, 1500);
+      try {
+        const data = await import('../data/ash_collection.json');
+        setCards(data.default);
+      } catch (error) {
+        console.error('Error fetching cards:', error);
+      } finally {
+        setTimeout(() => {
+          dispatch(setLoading(false));
+        }, 1000);
+      }
     };
 
     fetchCards();

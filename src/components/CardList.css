@@ -1,0 +1,15 @@
+.card-list-container {
+    min-height: 300px; /* Prevents the layout from shrinking */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+.empty-state {
+    font-size: 18px;
+    font-weight: 500;
+    color: #666;
+    margin-top: 20px;
+}
