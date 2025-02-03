@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
+import GlobalSpinner from './GlobalSpinner';
 
 const { Content } = Layout;
 
@@ -11,26 +12,12 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <Layout
-      style={{
-        minHeight: '100vh',
-        background: '#f0f2f5',
-      }}
-    >
+    <Layout style={{ minHeight: '100vh', background: '#f0f2f5' }}>
       <AppHeader />
-
-      <Content
-        style={{
-          margin: '20px',
-          padding: '20px',
-          background: '#fff',
-          borderRadius: '8px',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-        }}
-      >
+      <GlobalSpinner />
+      <Content style={{ margin: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' }}>
         {children}
       </Content>
-
       <AppFooter />
     </Layout>
   );

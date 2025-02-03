@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { List, Spin } from 'antd';
+import { List } from 'antd';
 import CardItem from '@components/CardItem';
-import ashCollection from '../data/ash_collection.json';
 import { PokemonCard } from '@types';
 
-const CardList: React.FC = () => {
-  const [cards, setCards] = useState<PokemonCard[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+interface CardListProps {
+  cards: PokemonCard[];
+}
 
-  useEffect(() => {
-    setCards(ashCollection as unknown as PokemonCard[]);
-    setLoading(false);
-  }, []);
+const CardList: React.FC<CardListProps> = ({cards}) => {
+  // const [cards, setCards] = useState<PokemonCard[]>([]);
+  // const [loading, setLoading] = useState<boolean>(true);
 
-  if (loading) {
-    return <Spin size="large" />;
-  }
+  // useEffect(() => {
+  //   setCards(ashCollection as unknown as PokemonCard[]);
+  //   setLoading(false);
+  // }, []);
+
+  // if (loading) {
+  //   return <Spin size="large" />;
+  // }
 
   return (
     <List
@@ -28,6 +30,7 @@ const CardList: React.FC = () => {
         xl: 4,
         xxl: 4,
       }}
+      style={{ width: '100%' }}
       dataSource={cards}
       renderItem={(card: PokemonCard) => (
         <List.Item key={card.id}>
