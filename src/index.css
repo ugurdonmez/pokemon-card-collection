@@ -66,3 +66,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Remove the default blue underline for anchor tags */
+.menu-item {
+  text-decoration: none; /* Removes the underline */
+}
+
+.menu-item:focus,
+.menu-item:active {
+  outline: none; /* Removes the focus outline */
+  text-decoration: none; /* Ensures no underline on focus/active states */
+}
+
+.ant-menu-item a {
+  text-decoration: none !important; /* Specific to Ant Design menu links */
+}
+
+.ant-menu-item a:hover {
+  text-decoration: none !important; /* Prevents underline on hover */
+}

@@ -17,7 +17,7 @@ const PokemonCardListView: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        Candy Crush Card Collection
+        Card Collection
       </h1>
       <CardList />
     </div>

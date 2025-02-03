@@ -1,0 +1,45 @@
+/* Header container styling */
+.header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 100px;
+  }
+  
+  /* Logo / Title styling */
+  .header-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff9800;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Navigation menu container */
+  .custom-menu {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Menu item default styling */
+  .menu-item {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    color: #464646;
+    text-decoration: none;
+    margin: 0 0.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: large;
+  }
+  
+  /* Hover and active states */
+  .menu-item:hover,
+  .menu-item.is-active {
+    color: #ff6a00; /* Change color on hover or active state */
+    text-decoration: none; /* Ensure no underline */
+  }
+  
