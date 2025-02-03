@@ -6,7 +6,9 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@types": ["types/index"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@config": ["config/index"],
+      "@Vviews": ["views/index"],
 
     },
   },

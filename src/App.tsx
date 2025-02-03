@@ -1,14 +1,13 @@
-import './App.css'
-import CardList from '@components/CardList';
+import React from 'react';
+import AppLayout from './components/AppLayout';
+import PokemonCardListView from './views/PokemonCardListView';
 
-function App() {
-
+const App: React.FC = () => {
   return (
-    <div className="App">
-        <h1>Pokémon Card Collection</h1>
-        <CardList />
-      </div>
-  )
-}
+    <AppLayout>
+      <PokemonCardListView />
+    </AppLayout>
+  );
+};
 
-export default App
+export default App;
