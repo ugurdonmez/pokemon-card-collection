@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "jest",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --repo https://x-access-token:${GITHUB_TOKEN}@github.com/ugurdonez/pokemon-card-collection.git"
+
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
