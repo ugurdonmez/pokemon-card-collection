@@ -5,7 +5,7 @@ import pokemonData from '../data/ash_collection.json';
 import * as echarts from 'echarts';
 import './SummaryPage.css';
 
-// TODO: use same type for both
+// Define Types
 interface PokemonCard {
   rarity?: string;
   hp?: string;
@@ -14,19 +14,85 @@ interface PokemonCard {
   attacks?: { damage?: string }[];
 }
 
-const sections = ['rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize'];
+// Define Sections
+const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize'];
 
 const SummaryPage: React.FC = () => {
-  const [currentSection, setCurrentSection] = useState(0); 
+  const [currentSection, setCurrentSection] = useState(0);
   const totalSections = sections.length;
-  const [isScrolling, setIsScrolling] = useState(false);  
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  // State for processed data
+  const [rarityCounts, setRarityCounts] = useState<Record<string, number>>({});
+  const [hpBuckets, setHpBuckets] = useState<number[]>([0, 0, 0, 0, 0]);
+  const [damageBuckets, setDamageBuckets] = useState<number[]>([0, 0, 0, 0, 0]);
+  const [typeCounts, setTypeCounts] = useState<Record<string, number>>({});
+  const [strongestPokemons, setStrongestPokemons] = useState<PokemonCard[]>([]);
+  const [totalCards, setTotalCards] = useState<number>(0);
+
+  useEffect(() => {
+    // Initialize maps
+    const rarityMap: Record<string, number> = {};
+    const typeMap: Record<string, number> = {};
+    const hpValues: number[] = [];
+    const damageValues: number[] = [];
+    let topHP: PokemonCard[] = [];
+
+    pokemonData.forEach((card) => {
+      if (card.rarity) rarityMap[card.rarity] = (rarityMap[card.rarity] || 0) + 1;
+      if (card.supertype) typeMap[card.supertype] = (typeMap[card.supertype] || 0) + 1;
+
+      if (card.hp) {
+        const hp = Number(card.hp);
+        hpValues.push(hp);
+        topHP.push(card);
+      }
+
+      if (card.attacks) {
+        card.attacks.forEach((attack) => {
+          const damageValue = parseInt(attack.damage);
+          if (!isNaN(damageValue)) {
+            damageValues.push(damageValue);
+          }
+        });
+      }
+    });
+
+    // Sort top HP Pokémon
+    topHP.sort((a, b) => Number(b.hp) - Number(a.hp));
+    setStrongestPokemons(topHP.slice(0, 5));
+
+    // Group HP into buckets
+    const hpRanges = [0, 0, 0, 0, 0];
+    hpValues.forEach((hp) => {
+      if (hp <= 50) hpRanges[0]++;
+      else if (hp <= 100) hpRanges[1]++;
+      else if (hp <= 150) hpRanges[2]++;
+      else if (hp <= 200) hpRanges[3]++;
+      else hpRanges[4]++;
+    });
+    setHpBuckets(hpRanges);
+
+    // Group Attack Damage into buckets
+    const damageRanges = [0, 0, 0, 0, 0];
+    damageValues.forEach((damage) => {
+      if (damage <= 30) damageRanges[0]++;
+      else if (damage <= 60) damageRanges[1]++;
+      else if (damage <= 90) damageRanges[2]++;
+      else if (damage <= 120) damageRanges[3]++;
+      else damageRanges[4]++;
+    });
+    setDamageBuckets(damageRanges);
+
+    // Set final counts
+    setRarityCounts(rarityMap);
+    setTypeCounts(typeMap);
+    setTotalCards(pokemonData.length);
+  }, []);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
-      if (isScrolling) {
-        return;
-      }
-      
+      if (isScrolling) return;
       setIsScrolling(true);
 
       if (event.deltaY > 0) {
@@ -35,41 +101,14 @@ const SummaryPage: React.FC = () => {
         setCurrentSection((prev) => Math.max(prev - 1, 0));
       }
 
-      setTimeout(() => setIsScrolling(false), 2000);
+      setTimeout(() => setIsScrolling(false), 1000);
     };
 
     window.addEventListener('wheel', handleScroll, { passive: false });
     return () => window.removeEventListener('wheel', handleScroll);
   }, [totalSections, isScrolling]);
 
-
-  // Data Calculations
-  const rarityCounts: Record<string, number> = {};
-  const hpValues: number[] = [];
-  const typeCounts: Record<string, number> = {};
-  let strongestPokemons: PokemonCard[] = [];
-  let attackDamages: number[] = [];
-
-  pokemonData.forEach((card) => {
-    if (card.rarity) rarityCounts[card.rarity] = (rarityCounts[card.rarity] || 0) + 1;
-    if (card.hp) hpValues.push(Number(card.hp));
-    if (card.supertype) typeCounts[card.supertype] = (typeCounts[card.supertype] || 0) + 1;
-
-    if (card.hp) {
-      strongestPokemons.push(card);
-    }
-
-    if (card.attacks) {
-      card.attacks.forEach((attack) => {
-        if (attack.damage) attackDamages.push(parseInt(attack.damage.replace(/\D/g, '')) || 0);
-      });
-    }
-  });
-
-  strongestPokemons = strongestPokemons.sort((a, b) => Number(b.hp) - Number(a.hp)).slice(0, 5);
-  attackDamages.sort((a, b) => b - a);
-
-  // Chart Configs
+  // Chart Configurations
   const rarityChartOptions: echarts.EChartsOption = {
     title: { text: 'Pokémon Rarity Distribution', left: 'center' },
     tooltip: { trigger: 'item' },
@@ -78,10 +117,10 @@ const SummaryPage: React.FC = () => {
 
   const hpChartOptions: echarts.EChartsOption = {
     title: { text: 'HP Distribution', left: 'center' },
-    tooltip: {},
-    xAxis: { type: 'category', data: hpValues.sort((a, b) => a - b) },
-    yAxis: { type: 'value' },
-    series: [{ type: 'bar', data: hpValues }],
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', data: ['0-50', '51-100', '101-150', '151-200', '201+'], name: 'HP Range' },
+    yAxis: { type: 'value', name: 'Number of Pokémon' },
+    series: [{ type: 'bar', data: hpBuckets }],
   };
 
   const typeChartOptions: echarts.EChartsOption = {
@@ -92,49 +131,34 @@ const SummaryPage: React.FC = () => {
 
   const damageChartOptions: echarts.EChartsOption = {
     title: { text: 'Attack Damage Distribution', left: 'center' },
-    tooltip: {},
-    xAxis: { type: 'category', data: attackDamages },
-    yAxis: { type: 'value' },
-    series: [{ type: 'bar', data: attackDamages }],
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', data: ['0-30', '31-60', '61-90', '91-120', '121+'], name: 'Damage Range' },
+    yAxis: { type: 'value', name: 'Number of Attacks' },
+    series: [{ type: 'bar', data: damageBuckets }],
   };
 
-  // Section Data
+  // Section Data (Your original content is kept)
   const sectionsData = [
-    { title: '🃏 Pokémon Rarity', text: 'How rare are Ash’s Pokémon?', chart: rarityChartOptions },
-    { title: '💪 HP Distribution', text: 'Which Pokémon have the most HP?', chart: hpChartOptions },
-    { title: '📚 Card Type Breakdown', text: 'Pokémon, Trainer, or Energy?', chart: typeChartOptions },
-    { title: '🔥 Ash’s Strongest Pokémon', text: 'Top 5 Pokémon with the highest HP', chart: null, list: strongestPokemons.map((p) => `${p.name} - HP: ${p.hp}`) },
-    { title: '⚔️ Attack Damage Stats', text: 'Pokémon Attack Damage Analysis', chart: damageChartOptions },
-    { title: '📦 Collection Size', text: `Ash has collected **${pokemonData.length}** Pokémon cards!`, chart: null },
+    { title: '🎴 Welcome to Ash’s Pokémon Card Collection!', text: 'This page is a complete breakdown of Ash’s card collection...', chart: null },
+    { title: '🃏 Understanding Pokémon Rarity', text: 'Pokémon cards come in different rarities...', chart: rarityChartOptions },
+    { title: '💪 What is HP (Health Points)?', text: 'HP represents a Pokémon’s endurance...', chart: hpChartOptions },
+    { title: '📚 What are Pokémon Card Types?', text: 'There are three main types of Pokémon cards...', chart: typeChartOptions },
+    { title: '🔥 Ash’s Strongest Pokémon', text: 'These are the Pokémon with the highest HP...', chart: null, list: strongestPokemons.map((p) => `${p.name} - HP: ${p.hp}`) },
+    { title: '⚔️ Attack Damage Explained', text: 'Attacks deal damage to the opponent...', chart: damageChartOptions },
+    { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
   ];
 
   return (
     <div className="summary-container">
       <h1>📜 Ash's Pokémon Collection Summary</h1>
 
-                  <blockquote className="pokemon-quote">
-        "A Caterpie may change into a Butterfree, but the heart that beats inside remains the same." <br />— Brock, Pokémon Anime
-      </blockquote>
-
-
-      {/* Animated Sections */}
       <div className="viewport">
         <AnimatePresence mode="wait">
-          <motion.section
-            key={currentSection}
-            className="summary-section"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.section key={currentSection} className="summary-section">
             <h2>{sectionsData[currentSection].title}</h2>
             <p>{sectionsData[currentSection].text}</p>
-            {sectionsData[currentSection].chart ? (
-              <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '1000px', width: '100%' }} />
-            ) : sectionsData[currentSection].list ? (
-              <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>
-            ) : null}
+            {sectionsData[currentSection].chart && <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '500px', width: '100%' }} />}
+            {sectionsData[currentSection].list && <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>}
           </motion.section>
         </AnimatePresence>
       </div>
