@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ClipLoader } from 'react-spinners';
+import { PacmanLoader } from 'react-spinners';
 import { RootState } from '../store';
 
 const GlobalSpinner: React.FC = () => {
@@ -10,7 +10,7 @@ const GlobalSpinner: React.FC = () => {
 
   return (
     <div className="spinner-overlay">
-      <ClipLoader size={50} color="#FF6A00" />
+      <PacmanLoader size={100} color="#FF6A00" />
     </div>
   );
 };

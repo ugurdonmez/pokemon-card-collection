@@ -10,7 +10,7 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ cards }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(8); // Number of cards per page
+  const [pageSize, setPageSize] = useState(8);
 
   const handlePageChange = (page: number, pageSize?: number) => {
     setCurrentPage(page);
