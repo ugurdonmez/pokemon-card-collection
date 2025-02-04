@@ -8,13 +8,14 @@ const AppFooter: React.FC = () => {
     <Footer
       style={{
         textAlign: 'center',
-        background: 'linear-gradient(45deg, #7873f5, #ff6ec4)',
+        background: '#3b3b3b',
         color: '#fff',
         fontFamily: '"Comic Sans MS", cursive, sans-serif',
         fontSize: '16px',
+        height: '100px',
       }}
     >
-      Candy Crush Cards ©2025 Created by Your Name • Powered by React & Ant Design
+      <div style={{ marginTop: '10px' }}>Pokemon Cards ©2025 Created by Ugur Donmez • Powered by React & Ant Design</div>
     </Footer>
   );
 };
