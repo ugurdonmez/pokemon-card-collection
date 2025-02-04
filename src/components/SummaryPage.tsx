@@ -112,6 +112,11 @@ const SummaryPage: React.FC = () => {
     <div className="summary-container">
       <h1>📜 Ash's Pokémon Collection Summary</h1>
 
+                  <blockquote className="pokemon-quote">
+        "A Caterpie may change into a Butterfree, but the heart that beats inside remains the same." <br />— Brock, Pokémon Anime
+      </blockquote>
+
+
       {/* Animated Sections */}
       <div className="viewport">
         <AnimatePresence mode="wait">
@@ -126,7 +131,7 @@ const SummaryPage: React.FC = () => {
             <h2>{sectionsData[currentSection].title}</h2>
             <p>{sectionsData[currentSection].text}</p>
             {sectionsData[currentSection].chart ? (
-              <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '500px', width: '100%' }} />
+              <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '1000px', width: '100%' }} />
             ) : sectionsData[currentSection].list ? (
               <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>
             ) : null}
