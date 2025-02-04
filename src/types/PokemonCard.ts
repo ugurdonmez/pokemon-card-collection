@@ -1,34 +1,188 @@
 export interface PokemonCard {
+
     id: string;
+  
     name: string;
+  
     supertype: string;
-    subtypes: string[];
+  
+    subtypes?: string[];
+  
+    level?: string;
+  
     hp?: string;
+  
     types?: string[];
+  
+    evolvesTo?: string[];
+  
     attacks?: {
-        cost: string[];
-        name: string;
-        text: string;
-        damage: string;
-        convertedEnergyCost: number;
+  
+      name: string;
+  
+      cost: string[];
+  
+      convertedEnergyCost: number;
+  
+      damage: string;
+  
+      text: string;
+  
     }[];
+  
     weaknesses?: {
-        type: string;
-        value: string;
+  
+      type: string;
+  
+      value: string;
+  
     }[];
+  
+    resistances?: {
+  
+      type: string;
+  
+      value: string;
+  
+    }[];
+  
     retreatCost?: string[];
+  
     convertedRetreatCost?: number;
-    number: string;
-    artist: string;
-    rarity: string;
-    flavorText?: string;
-    nationalPokedexNumbers?: number[];
-    legalities: {
+  
+    set?: {
+  
+      id: string;
+  
+      name: string;
+  
+      series: string;
+  
+      printedTotal: number;
+  
+      total: number;
+  
+      legalities: {
+  
         unlimited: string;
+  
+        standard: string;
+  
+        expanded: string;
+  
+      };
+  
+      ptcgoCode: string;
+  
+      releaseDate: string;
+  
+      updatedAt: string;
+  
+      images: {
+  
+        symbol: string;
+  
+        logo: string;
+  
+      };
+  
     };
+  
+    number?: string;
+  
+    artist?: string;
+  
+    rarity: string;
+  
+    flavorText?: string;
+  
+    nationalPokedexNumbers?: number[];
+  
+    legalities?: {
+  
+      unlimited: string;
+  
+      standard: string;
+  
+      expanded: string;
+  
+    };
+  
     images: {
-        small: string;
-        large: string;
+  
+      small: string;
+  
+      large: string;
+  
     };
-    rules?: string[];
-}
+  
+    tcgplayer?: {
+  
+      url: string;
+  
+      updatedAt: string;
+  
+      prices: {
+  
+        holofoil: {
+  
+          low: number;
+  
+          mid: number;
+  
+          high: number;
+  
+          market: number;
+  
+          directLow: number;
+  
+        };
+  
+        reverseHolofoil: {
+  
+          low: number;
+  
+          mid: number;
+  
+          high: number;
+  
+          market: number;
+  
+          directLow: number;
+  
+        };
+  
+      };
+  
+    };
+  
+    cardmarket?: {
+  
+      url: string;
+  
+      updatedAt: string;
+  
+      prices: {
+  
+        averageSellPrice: number;
+  
+        lowPrice: number;
+  
+        trendPrice: number;
+  
+        germanProLow: number;
+  
+        suggestedPrice: number;
+  
+        reverseHoloSell: number;
+  
+        reverseHoloLow: number;
+  
+        reverseHoloTrend: number;
+  
+      };
+  
+    };
+  
+  }
+  

@@ -8,7 +8,7 @@ import { PokemonCard } from '@types';
 const PokemonCardListView: React.FC = () => {
   const dispatch = useDispatch();
   const [cards, setCards] = useState<PokemonCard[]>([]);
-  const [filteredCards, setFilteredCards] = useState<PokemonCard[]>([]);
+  const [, setFilteredCards] = useState<PokemonCard[]>([]);
   const [sortedCards, setSortedCards] = useState<PokemonCard[]>([]);
   const [filters, setFilters] = useState<any>({});
 
@@ -17,9 +17,9 @@ const PokemonCardListView: React.FC = () => {
       dispatch(setLoading(true));
       try {
         const data = await import('../data/ash_collection.json');
-        setCards(data.default);
-        setFilteredCards(data.default);
-        setSortedCards(data.default);
+        setCards(data.default as PokemonCard[]);
+        setFilteredCards(data.default as PokemonCard[]);
+        setSortedCards(data.default as PokemonCard[]);
       } catch (error) {
         console.error('Error fetching cards:', error);
       } finally {
