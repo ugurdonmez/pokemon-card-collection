@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../store/loadingSlice';
 import CardList from '../components/CardList';
-import Filters from '../components/Filters';
+import Filters from '../components/CardListFilters';
 
 const PokemonCardListView: React.FC = () => {
   const dispatch = useDispatch();
   const [cards, setCards] = useState<any[]>([]);
   const [filteredCards, setFilteredCards] = useState<any[]>([]);
-  // const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchCards = async () => {
