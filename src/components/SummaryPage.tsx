@@ -130,10 +130,51 @@ const SummaryPage: React.FC = () => {
 
   const typeChartOptions: echarts.EChartsOption = {
     title: { text: 'Card Type Distribution', left: 'center' },
-    tooltip: { trigger: 'item' },
-    series: [{ type: 'pie', radius: '65%', data: Object.entries(typeCounts).map(([type, count]) => ({ name: type, value: count })) }],
-  };
-
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    xAxis: {
+      type: 'category',
+      data: Object.keys(typeCounts),
+      axisTick: { alignWithLabel: true },
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        name: 'Count',
+        type: 'bar',
+        barWidth: '60%',
+        data: Object.entries(typeCounts).map(([type, count]) => ({
+          value: count,
+          itemStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 1,
+              y2: 0,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: type === 'Pokémon' ? '#ff6384' : type === 'Trainer' ? '#36a2eb' : '#ffce56',
+                },
+                {
+                  offset: 1,
+                  color: type === 'Pokémon' ? '#ff9aa2' : type === 'Trainer' ? '#9ad0f5' : '#ffe29a',
+                },
+              ],
+            },
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        })),
+      },
+    ],
+    animationEasing: 'elasticOut',
+    animationDelay: (idx) => idx * 100,
+  };  
+  
   const damageChartOptions: echarts.EChartsOption = {
     title: { text: 'Attack Damage Distribution', left: 'center' },
     tooltip: { trigger: 'axis' },
