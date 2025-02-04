@@ -112,9 +112,14 @@ const SummaryPage: React.FC = () => {
   const rarityChartOptions: echarts.EChartsOption = {
     title: { text: 'Pokémon Rarity Distribution', left: 'center' },
     tooltip: { trigger: 'item' },
-    series: [{ type: 'pie', radius: '65%', data: Object.entries(rarityCounts).map(([rarity, count]) => ({ name: rarity, value: count })) }],
+    series: [
+      {
+        type: 'pie',
+        radius: ['40%', '80%'], // Inner radius and outer radius for donut chart
+        data: Object.entries(rarityCounts).map(([rarity, count]) => ({ name: rarity, value: count })),
+      },
+    ],
   };
-
   const hpChartOptions: echarts.EChartsOption = {
     title: { text: 'HP Distribution', left: 'center' },
     tooltip: { trigger: 'axis' },
