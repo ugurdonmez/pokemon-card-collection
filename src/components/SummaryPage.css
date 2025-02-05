@@ -26,12 +26,19 @@
     text-align: center;
   }
   
-  .footer {
-    height: 100px;
-    background: #282c34;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .navigation-buttons {
+    margin-top: 20px;
+  }
+  
+  .navigation-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .navigation-buttons button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
   

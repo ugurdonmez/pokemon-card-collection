@@ -20,7 +20,6 @@ const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'colle
 const SummaryPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const totalSections = sections.length;
-  const [isScrolling, setIsScrolling] = useState(false);
 
   // State for processed data
   const [rarityCounts, setRarityCounts] = useState<Record<string, number>>({});
@@ -89,24 +88,6 @@ const SummaryPage: React.FC = () => {
     setTypeCounts(typeMap);
     setTotalCards(pokemonData.length);
   }, []);
-
-  useEffect(() => {
-    const handleScroll = (event: WheelEvent) => {
-      if (isScrolling) return;
-      setIsScrolling(true);
-
-      if (event.deltaY > 0) {
-        setCurrentSection((prev) => Math.min(prev + 1, totalSections - 1));
-      } else if (event.deltaY < 0) {
-        setCurrentSection((prev) => Math.max(prev - 1, 0));
-      }
-
-      setTimeout(() => setIsScrolling(false), 1000);
-    };
-
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    return () => window.removeEventListener('wheel', handleScroll);
-  }, [totalSections, isScrolling]);
 
   // Chart Configurations
   const rarityChartOptions: echarts.EChartsOption = {
@@ -194,6 +175,14 @@ const SummaryPage: React.FC = () => {
     { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
   ];
 
+  const handleNext = () => {
+    setCurrentSection((prev) => Math.min(prev + 1, totalSections - 1));
+  };
+
+  const handlePrev = () => {
+    setCurrentSection((prev) => Math.max(prev - 1, 0));
+  };
+
   return (
     <div className="summary-container">
       <h1>📜 Ash's Pokémon Collection Summary</h1>
@@ -207,6 +196,11 @@ const SummaryPage: React.FC = () => {
             {sectionsData[currentSection].list && <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>}
           </motion.section>
         </AnimatePresence>
+      </div>
+
+      <div className="navigation-buttons">
+        <button onClick={handlePrev} disabled={currentSection === 0}>Previous</button>
+        <button onClick={handleNext} disabled={currentSection === totalSections - 1}>Next</button>
       </div>
     </div>
   );
