@@ -11,11 +11,12 @@ interface PokemonCard {
   hp?: string;
   supertype?: string;
   name: string;
+  types?: string[];
   attacks?: { damage?: string }[];
 }
 
 // Define Sections
-const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize'];
+const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize', 'pokemonTypes'];
 
 const SummaryPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -26,6 +27,7 @@ const SummaryPage: React.FC = () => {
   const [hpBuckets, setHpBuckets] = useState<number[]>([0, 0, 0, 0, 0]);
   const [damageBuckets, setDamageBuckets] = useState<number[]>([0, 0, 0, 0, 0]);
   const [typeCounts, setTypeCounts] = useState<Record<string, number>>({});
+  const [pokemonTypeCounts, setPokemonTypeCounts] = useState<Record<string, number>>({});
   const [strongestPokemons, setStrongestPokemons] = useState<PokemonCard[]>([]);
   const [totalCards, setTotalCards] = useState<number>(0);
 
@@ -33,6 +35,7 @@ const SummaryPage: React.FC = () => {
     // Initialize maps
     const rarityMap: Record<string, number> = {};
     const typeMap: Record<string, number> = {};
+    const pokemonTypeMap: Record<string, number> = {};
     const hpValues: number[] = [];
     const damageValues: number[] = [];
     let topHP: PokemonCard[] = [];
@@ -40,6 +43,12 @@ const SummaryPage: React.FC = () => {
     pokemonData.forEach((card) => {
       if (card.rarity) rarityMap[card.rarity] = (rarityMap[card.rarity] || 0) + 1;
       if (card.supertype) typeMap[card.supertype] = (typeMap[card.supertype] || 0) + 1;
+
+      if (card.types) {
+        card.types.forEach((type) => {
+          pokemonTypeMap[type] = (pokemonTypeMap[type] || 0) + 1;
+        });
+      }
 
       if (card.hp) {
         const hp = Number(card.hp);
@@ -86,6 +95,7 @@ const SummaryPage: React.FC = () => {
     // Set final counts
     setRarityCounts(rarityMap);
     setTypeCounts(typeMap);
+    setPokemonTypeCounts(pokemonTypeMap);
     setTotalCards(pokemonData.length);
   }, []);
 
@@ -101,105 +111,108 @@ const SummaryPage: React.FC = () => {
       },
     ],
   };
-const hpChartOptions: echarts.EChartsOption = {
-  title: { text: 'HP Distribution', left: 'center' },
-  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-  xAxis: {
-    type: 'category',
-    data: ['0-50', '51-100', '101-150', '151-200', '201+'],
-    name: 'HP Range',
-    axisTick: { alignWithLabel: true },
-  },
-  yAxis: {
-    type: 'value',
-    name: 'Number of Pokémon',
-  },
-  series: [
-    {
-      name: 'Count',
-      type: 'bar',
-      barWidth: '60%',
-      data: hpBuckets.map((count, index) => ({
-        value: count,
+
+  const hpChartOptions: echarts.EChartsOption = {
+    title: { text: 'HP Distribution', left: 'center' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    xAxis: {
+      type: 'category',
+      data: ['0-50', '51-100', '101-150', '151-200', '201+'],
+      name: 'HP Range',
+      axisTick: { alignWithLabel: true },
+      axisLine: { show: false }, // Remove the x-axis line
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Number of Pokémon',
+    },
+    series: [
+      {
+        name: 'Count',
+        type: 'bar',
+        barWidth: '60%',
+        data: hpBuckets.map((count, index) => ({
+          value: count,
+          itemStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 1,
+              y2: 0,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: index === 0 ? '#ff6384' : index === 1 ? '#36a2eb' : index === 2 ? '#ffce56' : index === 3 ? '#4bc0c0' : '#9966ff',
+                },
+                {
+                  offset: 1,
+                  color: index === 0 ? '#ff9aa2' : index === 1 ? '#9ad0f5' : index === 2 ? '#ffe29a' : index === 3 ? '#a3e4e4' : '#c3a6ff',
+                },
+              ],
+            },
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        })),
+      },
+    ],
+    animationEasing: 'elasticOut',
+    animationDelay: (idx) => idx * 100,
+  };
+
+  const typeChartOptions: echarts.EChartsOption = {
+    title: { text: 'Card Type Distribution', left: 'center' },
+    tooltip: { trigger: 'item' },
+    angleAxis: {
+      type: 'category',
+      data: Object.keys(typeCounts),
+      axisLine: { show: false }, // Remove the x-axis line
+    },
+    radiusAxis: {
+      type: 'value',
+    },
+    polar: {},
+    series: [
+      {
+        type: 'bar',
+        data: Object.values(typeCounts),
+        coordinateSystem: 'polar',
         itemStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 1,
-            y2: 0,
-            colorStops: [
-              {
-                offset: 0,
-                color: index === 0 ? '#ff6384' : index === 1 ? '#36a2eb' : index === 2 ? '#ffce56' : index === 3 ? '#4bc0c0' : '#9966ff',
-              },
-              {
-                offset: 1,
-                color: index === 0 ? '#ff9aa2' : index === 1 ? '#9ad0f5' : index === 2 ? '#ffe29a' : index === 3 ? '#a3e4e4' : '#c3a6ff',
-              },
-            ],
+          color: (params) => {
+            const colors = ['#ff6384', '#36a2eb', '#ffce56'];
+            return colors[params.dataIndex % colors.length];
           },
           shadowBlur: 10,
           shadowOffsetX: 0,
           shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
-      })),
-    },
-  ],
-  animationEasing: 'elasticOut',
-  animationDelay: (idx) => idx * 100,
-};
+      },
+    ],
+    animationEasing: 'elasticOut',
+    animationDelay: (idx) => idx * 100,
+  };
 
-const typeChartOptions: echarts.EChartsOption = {
-  title: { text: 'Card Type Distribution', left: 'center' },
-  tooltip: { trigger: 'item' },
-  radar: {
-    indicator: Object.keys(typeCounts).map((type) => ({ name: type, max: Math.max(...Object.values(typeCounts)) })),
-    shape: 'circle',
-    splitNumber: 5,
-    axisName: {
-      color: '#333',
-      fontSize: 14,
-    },
-    splitLine: {
-      lineStyle: {
-        color: 'rgba(0, 0, 0, 0.2)',
-      },
-    },
-    splitArea: {
-      areaStyle: {
-        color: ['rgba(0, 0, 0, 0.05)'],
-      },
-    },
-    axisLine: {
-      lineStyle: {
-        color: 'rgba(0, 0, 0, 0.2)',
-      },
-    },
-  },
-  series: [
-    {
-      name: 'Card Types',
-      type: 'radar',
-      data: [
-        {
-          value: Object.values(typeCounts),
-          name: 'Card Types',
-          areaStyle: {
-            color: 'rgba(0, 136, 212, 0.2)',
-          },
-          lineStyle: {
-            color: '#0088d4',
-          },
-          itemStyle: {
-            color: '#0088d4',
-          },
+  const pokemonTypeChartOptions: echarts.EChartsOption = {
+    title: { text: 'Pokémon Types Distribution', left: 'center' },
+    tooltip: { trigger: 'item' },
+    series: [
+      {
+        type: 'pie',
+        radius: '70%',
+        data: Object.entries(pokemonTypeCounts).map(([type, count]) => ({ name: type, value: count })),
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
-      ],
-    },
-  ],
-};
-  
+      },
+    ],
+    animationEasing: 'elasticOut',
+    animationDelay: (idx) => idx * 100,
+  };
+
   const damageChartOptions: echarts.EChartsOption = {
     title: { text: 'Attack Damage Distribution', left: 'center' },
     tooltip: { trigger: 'axis' },
@@ -217,8 +230,8 @@ const typeChartOptions: echarts.EChartsOption = {
         
         **Fun Facts:**
         - The collection includes a total of **${totalCards}** Pokémon cards.
-        - The rarest card in the collection is the **${Object.keys(rarityCounts).reduce((a, b) => rarityCounts[a] < rarityCounts[b] ? a : b)}** card.
-        - The Pokémon with the highest HP is **${strongestPokemons[0]?.name}** with **${strongestPokemons[0]?.hp} HP**.
+        - The rarest card in the collection is the **${Object.keys(rarityCounts).reduce((a, b) => rarityCounts[a] < rarityCounts[b] ? a : b, '')}** card.
+        - The Pokémon with the highest HP is **${strongestPokemons[0]?.name || 'N/A'}** with **${strongestPokemons[0]?.hp || 'N/A'} HP**.
 
         **What to Expect:**
         - **Rarity Distribution:** See how the cards are distributed across different rarity levels.
@@ -238,6 +251,7 @@ const typeChartOptions: echarts.EChartsOption = {
     { title: '🔥 Ash’s Strongest Pokémon', text: 'These are the Pokémon with the highest HP...', chart: null, list: strongestPokemons.map((p) => `${p.name} - HP: ${p.hp}`) },
     { title: '⚔️ Attack Damage Explained', text: 'Attacks deal damage to the opponent...', chart: damageChartOptions },
     { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
+    { title: '🌊 Pokémon Types', text: 'Explore the distribution of different Pokémon types in the collection...', chart: pokemonTypeChartOptions },
   ];
 
   const handleNext = () => {
