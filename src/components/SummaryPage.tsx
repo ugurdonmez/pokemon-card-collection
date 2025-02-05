@@ -149,52 +149,56 @@ const hpChartOptions: echarts.EChartsOption = {
   animationEasing: 'elasticOut',
   animationDelay: (idx) => idx * 100,
 };
-  const typeChartOptions: echarts.EChartsOption = {
-    title: { text: 'Card Type Distribution', left: 'center' },
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    xAxis: {
-      type: 'category',
-      data: Object.keys(typeCounts),
-      axisTick: { alignWithLabel: true },
+
+const typeChartOptions: echarts.EChartsOption = {
+  title: { text: 'Card Type Distribution', left: 'center' },
+  tooltip: { trigger: 'item' },
+  radar: {
+    indicator: Object.keys(typeCounts).map((type) => ({ name: type, max: Math.max(...Object.values(typeCounts)) })),
+    shape: 'circle',
+    splitNumber: 5,
+    axisName: {
+      color: '#333',
+      fontSize: 14,
     },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        name: 'Count',
-        type: 'bar',
-        barWidth: '60%',
-        data: Object.entries(typeCounts).map(([type, count]) => ({
-          value: count,
-          itemStyle: {
-            color: {
-              type: 'linear',
-              x: 0,
-              y: 0,
-              x2: 1,
-              y2: 0,
-              colorStops: [
-                {
-                  offset: 0,
-                  color: type === 'Pokémon' ? '#ff6384' : type === 'Trainer' ? '#36a2eb' : '#ffce56',
-                },
-                {
-                  offset: 1,
-                  color: type === 'Pokémon' ? '#ff9aa2' : type === 'Trainer' ? '#9ad0f5' : '#ffe29a',
-                },
-              ],
-            },
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
-          },
-        })),
+    splitLine: {
+      lineStyle: {
+        color: 'rgba(0, 0, 0, 0.2)',
       },
-    ],
-    animationEasing: 'elasticOut',
-    animationDelay: (idx) => idx * 100,
-  };  
+    },
+    splitArea: {
+      areaStyle: {
+        color: ['rgba(0, 0, 0, 0.05)'],
+      },
+    },
+    axisLine: {
+      lineStyle: {
+        color: 'rgba(0, 0, 0, 0.2)',
+      },
+    },
+  },
+  series: [
+    {
+      name: 'Card Types',
+      type: 'radar',
+      data: [
+        {
+          value: Object.values(typeCounts),
+          name: 'Card Types',
+          areaStyle: {
+            color: 'rgba(0, 136, 212, 0.2)',
+          },
+          lineStyle: {
+            color: '#0088d4',
+          },
+          itemStyle: {
+            color: '#0088d4',
+          },
+        },
+      ],
+    },
+  ],
+};
   
   const damageChartOptions: echarts.EChartsOption = {
     title: { text: 'Attack Damage Distribution', left: 'center' },
