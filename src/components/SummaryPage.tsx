@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import pokemonData from '../data/ash_collection.json';
 import * as echarts from 'echarts';
 import './SummaryPage.css';
@@ -19,6 +20,8 @@ interface PokemonCard {
 const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize', 'pokemonTypes'];
 
 const SummaryPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [currentSection, setCurrentSection] = useState(0);
   const totalSections = sections.length;
 
@@ -97,7 +100,14 @@ const SummaryPage: React.FC = () => {
     setTypeCounts(typeMap);
     setPokemonTypeCounts(pokemonTypeMap);
     setTotalCards(pokemonData.length);
-  }, []);
+
+    // Set initial section from URL
+    const params = new URLSearchParams(location.search);
+    const section = params.get('section');
+    if (section && sections.includes(section)) {
+      setCurrentSection(sections.indexOf(section));
+    }
+  }, [location.search]);
 
   // Chart Configurations
   const rarityChartOptions: echarts.EChartsOption = {
@@ -255,11 +265,15 @@ const SummaryPage: React.FC = () => {
   ];
 
   const handleNext = () => {
-    setCurrentSection((prev) => Math.min(prev + 1, totalSections - 1));
+    const nextSection = Math.min(currentSection + 1, totalSections - 1);
+    setCurrentSection(nextSection);
+    navigate(`?section=${sections[nextSection]}`);
   };
 
   const handlePrev = () => {
-    setCurrentSection((prev) => Math.max(prev - 1, 0));
+    const prevSection = Math.max(currentSection - 1, 0);
+    setCurrentSection(prevSection);
+    navigate(`?section=${sections[prevSection]}`);
   };
 
   return (
