@@ -1,30 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
-interface PokemonTypesHPBoxplotSectionProps {
-  pokemonData: { types?: string[]; hp?: string }[];
+interface PokemonHPBoxplotSectionProps {
+  pokemonData: { types?: string[]; hp?: string; rarity?: string; supertype?: string }[];
 }
 
-const PokemonTypesHPBoxplotSection: React.FC<PokemonTypesHPBoxplotSectionProps> = ({ pokemonData }) => {
-  const typeHPMap: Record<string, number[]> = {};
+const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokemonData }) => {
+  const [xAxisOption, setXAxisOption] = useState<'type' | 'rarity' | 'supertype'>('type');
 
-  // Group HP values by Pokémon types
-  pokemonData.forEach((pokemon) => {
-    if (pokemon.types && pokemon.hp) {
-      const hp = Number(pokemon.hp);
-      pokemon.types.forEach((type) => {
-        if (!typeHPMap[type]) {
-          typeHPMap[type] = [];
+  const groupByOption = (option: 'type' | 'rarity' | 'supertype') => {
+    const map: Record<string, number[]> = {};
+    pokemonData.forEach((pokemon) => {
+      if (pokemon.hp) {
+        const hp = Number(pokemon.hp);
+        if (option === 'type' && pokemon.types) {
+          pokemon.types.forEach((type) => {
+            if (!map[type]) {
+              map[type] = [];
+            }
+            map[type].push(hp);
+          });
+        } else {
+          const key = pokemon[option];
+          if (key) {
+            if (!map[key]) {
+              map[key] = [];
+            }
+            map[key].push(hp);
+          }
         }
-        typeHPMap[type].push(hp);
-      });
-    }
-  });
+      }
+    });
+    return map;
+  };
+
+  const typeHPMap = groupByOption(xAxisOption);
 
   // Prepare data for boxplot
-  const types = Object.keys(typeHPMap);
-  const data = types.map((type) => {
-    const hpValues = typeHPMap[type];
+  const categories = Object.keys(typeHPMap);
+  const data = categories.map((category) => {
+    const hpValues = typeHPMap[category];
     hpValues.sort((a, b) => a - b);
     const min = hpValues[0];
     const max = hpValues[hpValues.length - 1];
@@ -35,12 +50,12 @@ const PokemonTypesHPBoxplotSection: React.FC<PokemonTypesHPBoxplotSectionProps> 
   });
 
   const boxplotChartOptions: echarts.EChartsOption = {
-    title: { text: 'HP Distribution by Pokémon Types', left: 'center' },
+    title: { text: 'HP Distribution by Pokémon', left: 'center' },
     tooltip: { trigger: 'item' },
     xAxis: {
       type: 'category',
-      data: types,
-      name: 'Pokémon Types',
+      data: categories,
+      name: xAxisOption.charAt(0).toUpperCase() + xAxisOption.slice(1),
     },
     yAxis: {
       type: 'value',
@@ -59,11 +74,40 @@ const PokemonTypesHPBoxplotSection: React.FC<PokemonTypesHPBoxplotSectionProps> 
 
   return (
     <div>
-      <h2>📊 HP Distribution by Pokémon Types</h2>
-      <p>Explore the HP distribution of different Pokémon types in the collection...</p>
+      <h2>📊 HP Distribution by Pokémon</h2>
+      <p>Explore the HP distribution of different Pokémon in the collection...</p>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="type"
+            checked={xAxisOption === 'type'}
+            onChange={() => setXAxisOption('type')}
+          />
+          Type
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="rarity"
+            checked={xAxisOption === 'rarity'}
+            onChange={() => setXAxisOption('rarity')}
+          />
+          Rarity
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="supertype"
+            checked={xAxisOption === 'supertype'}
+            onChange={() => setXAxisOption('supertype')}
+          />
+          Supertype
+        </label>
+      </div>
       <ReactECharts option={boxplotChartOptions} style={{ height: '500px', width: '100%' }} />
     </div>
   );
 };
 
-export default PokemonTypesHPBoxplotSection;
+export default PokemonHPBoxplotSection;
