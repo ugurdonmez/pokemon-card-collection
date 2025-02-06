@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import ReactECharts from 'echarts-for-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import pokemonData from '../data/ash_collection.json';
-import * as echarts from 'echarts';
 import './SummaryPage.css';
 import IntroSection from '@components/sections/IntroSection';
 import RaritySection from '@components/sections/RaritySection';
-import HPDistributionSection from './sections/HPDistributionSection';
-import CardTypesSection from './sections/CardTypesSection';
-import StrongestPokemonSection from './sections/StrongestPokemonSection';
-import AttackDamageSection from './sections/AttackDamageSection';
-import CollectionSummarySection from './sections/CollectionSummarySection';
-import PokemonTypesSection from './sections/PokemonTypesSection';
+import HPDistributionSection from '@components/sections/HPDistributionSection';
+import CardTypesSection from '@components/sections/CardTypesSection';
+import StrongestPokemonSection from '@components/sections/StrongestPokemonSection';
+import AttackDamageSection from '@components/sections/AttackDamageSection';
+import CollectionSummarySection from '@components/sections/CollectionSummarySection';
+import PokemonTypesSection from '@components/sections/PokemonTypesSection';
+import PokemonTypesHPBoxplotSection from '@components/sections/PokemonTypesHPBoxplotSection';
 
 // Define Types
 interface PokemonCard {
@@ -25,7 +24,7 @@ interface PokemonCard {
 }
 
 // Define Sections
-const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize', 'pokemonTypes'];
+const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize', 'pokemonTypes', 'hpBoxplot'];
 
 const SummaryPage: React.FC = () => {
   const navigate = useNavigate();
@@ -156,6 +155,11 @@ const SummaryPage: React.FC = () => {
     {
       title: '🌊 Pokémon Types',
       text: <PokemonTypesSection pokemonTypeCounts={pokemonTypeCounts} />,
+      chart: null,
+    },
+    {
+      title: '📊 HP Distribution by Pokémon Types',
+      text: <PokemonTypesHPBoxplotSection pokemonData={pokemonData} />,
       chart: null,
     },
   ];
