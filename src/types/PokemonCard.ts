@@ -1,4 +1,4 @@
-interface PokemonCard {
+export interface PokemonCard {
   id: string;
   name: string;
   hp?: string;
@@ -56,4 +56,4 @@ interface PokemonCard {
   };
 }
 
-export default PokemonCard;
+// export default PokemonCard;

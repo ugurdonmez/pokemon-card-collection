@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setLoading } from '../store/loadingSlice';
 import CardList from '@components/CardList';
 import CardListFilters from '../components/CardListFilters';
-import PokemonCard from '../types/PokemonCard';
+import { PokemonCard } from '@types';
 
 const PokemonCardListView: React.FC = () => {
   const dispatch = useDispatch();
@@ -56,14 +56,16 @@ const PokemonCardListView: React.FC = () => {
     const sorted = [...filtered];
     if (filters.sort) {
       sorted.sort((a, b) => {
+        let comparison = 0;
         if (filters.sort === 'name') {
-          return a.name.localeCompare(b.name);
+          comparison = a.name.localeCompare(b.name);
         } else if (filters.sort === 'hp') {
-          return (parseInt(a.hp || '0') - parseInt(b.hp || '0'));
+          comparison = parseInt(a.hp || '0') - parseInt(b.hp || '0');
         } else if (filters.sort === 'rarity') {
-          return (a.rarity || '').localeCompare(b.rarity || '');
+          comparison = (a.rarity || '').localeCompare(b.rarity || '');
         }
-        return 0;
+
+        return filters.sortOrder === 'desc' ? -comparison : comparison;
       });
     }
 

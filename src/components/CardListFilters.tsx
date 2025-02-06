@@ -18,6 +18,7 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
   );
   const [name, setName] = useState(searchParams.get("name") || "");
   const [sort, setSort] = useState(searchParams.get("sort") || "name");
+  const [sortOrder, setSortOrder] = useState(searchParams.get("sortOrder") || "asc");
 
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
@@ -49,13 +50,14 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
     }
 
     newParams.set("sort", sort);
+    newParams.set("sortOrder", sortOrder);
   
     if (newParams.toString() !== searchParams.toString()) {
       setSearchParams(newParams, { replace: true });
     }
   
-    onFilterChange({ rarity, cardType, pokemonType, hpRange, name, sort });
-  }, [rarity, cardType, pokemonType, hpRange, name, sort]);
+    onFilterChange({ rarity, cardType, pokemonType, hpRange, name, sort, sortOrder });
+  }, [rarity, cardType, pokemonType, hpRange, name, sort, sortOrder]);
   
   return (
     <div className="filters-container">
@@ -129,6 +131,18 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
           <Select.Option value="name">Name</Select.Option>
           <Select.Option value="hp">HP</Select.Option>
           <Select.Option value="rarity">Rarity</Select.Option>
+        </Select>
+      </div>
+
+      <div className="filter-item">
+        <span>Sort Order:</span>
+        <Select
+          value={sortOrder}
+          onChange={setSortOrder}
+          className="filter-select"
+        >
+          <Select.Option value="asc">Ascending</Select.Option>
+          <Select.Option value="desc">Descending</Select.Option>
         </Select>
       </div>
     </div>
