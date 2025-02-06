@@ -10,6 +10,7 @@ import RaritySection from '@components/sections/RaritySection';
 import HPDistributionSection from './sections/HPDistributionSection';
 import CardTypesSection from './sections/CardTypesSection';
 import StrongestPokemonSection from './sections/StrongestPokemonSection';
+import AttackDamageSection from './sections/AttackDamageSection';
 
 // Define Types
 interface PokemonCard {
@@ -133,14 +134,6 @@ const SummaryPage: React.FC = () => {
     animationDelay: (idx) => idx * 100,
   };
 
-  const damageChartOptions: echarts.EChartsOption = {
-    title: { text: 'Attack Damage Distribution', left: 'center' },
-    tooltip: { trigger: 'axis' },
-    xAxis: { type: 'category', data: ['0-30', '31-60', '61-90', '91-120', '121+'], name: 'Damage Range' },
-    yAxis: { type: 'value', name: 'Number of Attacks' },
-    series: [{ type: 'bar', data: damageBuckets }],
-  };
-
   const sectionsData = [
     {
       title: '🎴 Welcome to Ash’s Pokémon Card Collection!',
@@ -167,7 +160,11 @@ const SummaryPage: React.FC = () => {
       text: <StrongestPokemonSection strongestPokemons={strongestPokemons} />,
       chart: null,
     },
-    { title: '⚔️ Attack Damage Explained', text: 'Attacks deal damage to the opponent...', chart: damageChartOptions },
+    {
+      title: '⚔️ Attack Damage Explained',
+      text: <AttackDamageSection damageBuckets={damageBuckets} />,
+      chart: null,
+    },
     { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
     { title: '🌊 Pokémon Types', text: 'Explore the distribution of different Pokémon types in the collection...', chart: pokemonTypeChartOptions },
   ];
@@ -193,8 +190,6 @@ const SummaryPage: React.FC = () => {
           <motion.section key={currentSection} className="summary-section">
             {/* <h2>{sectionsData[currentSection].title}</h2> */}
             <div>{sectionsData[currentSection].text}</div>
-            {sectionsData[currentSection].chart && <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '500px', width: '100%' }} />}
-            {sectionsData[currentSection].list && <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>}
           </motion.section>
         </AnimatePresence>
       </div>
