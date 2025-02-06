@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { useNavigate } from 'react-router-dom';
 
 interface PokemonHPBoxplotSectionProps {
   pokemonData: { types?: string[]; hp?: string; rarity?: string; supertype?: string }[];
 }
 
 const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokemonData }) => {
+  const navigate = useNavigate();
   const [xAxisOption, setXAxisOption] = useState<'types' | 'rarity' | 'supertype'>('types');
 
   const groupByOption = (option: 'types' | 'rarity' | 'supertype') => {
@@ -48,6 +50,22 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
     const q3 = hpValues[Math.floor((hpValues.length * 3) / 4)];
     return [min, q1, median, q3, max];
   });
+
+  const handleChartClick = (params: any) => {
+    const category = categories[params.dataIndex];
+
+    if (xAxisOption === 'types') {
+      navigate(`/cards?pokemonType=${category}&sort=name&sortOrder=asc`);
+      return;
+    }
+
+    if (xAxisOption === 'supertype') {
+      navigate(`/cards?type=${category}&sort=name&sortOrder=asc`);
+      return;
+    }
+
+    navigate(`/cards?${xAxisOption}=${category}&sort=name&sortOrder=asc`);
+  };
 
   const boxplotChartOptions: echarts.EChartsOption = {
     title: { text: 'HP Distribution by Pokémon', left: 'center' },
@@ -105,7 +123,11 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
           Supertype
         </label>
       </div>
-      <ReactECharts option={boxplotChartOptions} style={{ height: '500px', width: '100%' }} />
+      <ReactECharts
+        option={boxplotChartOptions}
+        style={{ height: '500px', width: '100%' }}
+        onEvents={{ 'click': handleChartClick }}
+      />
     </div>
   );
 };
