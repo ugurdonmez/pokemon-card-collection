@@ -21,7 +21,7 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
             map[type].push(hp);
           });
         } else {
-          const key = pokemon[option];
+          const key = pokemon[option] as string | undefined;
           if (key) {
             if (!map[key]) {
               map[key] = [];
