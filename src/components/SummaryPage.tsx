@@ -32,7 +32,7 @@ const SummaryPage: React.FC = () => {
   const [damageBuckets, setDamageBuckets] = useState<number[]>([0, 0, 0, 0, 0]);
   const [typeCounts, setTypeCounts] = useState<Record<string, number>>({});
   const [pokemonTypeCounts, setPokemonTypeCounts] = useState<Record<string, number>>({});
-  const [strongestPokemons, setStrongestPokemons] = useState<PokemonCard[]>([]);
+  const [strongestPokemons, setStrongestPokemons] = useState<{ name: string; hp: string }[]>([]);
   const [totalCards, setTotalCards] = useState<number>(0);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const SummaryPage: React.FC = () => {
 
     // Sort top HP Pokémon
     topHP.sort((a, b) => Number(b.hp) - Number(a.hp));
-    setStrongestPokemons(topHP.slice(0, 5));
+    setStrongestPokemons(topHP.slice(0, 5).map(p => ({ name: p.name, hp: p.hp || 'N/A' })));
 
     // Group HP into buckets
     const hpRanges = [0, 0, 0, 0, 0];
@@ -179,7 +179,7 @@ const SummaryPage: React.FC = () => {
     angleAxis: {
       type: 'category',
       data: Object.keys(typeCounts),
-      axisLine: { show: false }, // Remove the x-axis line
+      axisLine: { show: false },
     },
     radiusAxis: {
       type: 'value',
@@ -232,7 +232,6 @@ const SummaryPage: React.FC = () => {
     series: [{ type: 'bar', data: damageBuckets }],
   };
 
-  // Section Data (Your original content is kept)
   const sectionsData = [
     {
       title: '🎴 Welcome to Ash’s Pokémon Card Collection!',
