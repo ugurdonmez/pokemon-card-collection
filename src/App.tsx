@@ -3,6 +3,7 @@ import AppLayout from '@components/AppLayout';
 import PokemonCardListView from './views/PokemonCardListView';
 import { Routes, Route } from 'react-router-dom';
 import SummaryView from './views/SummaryView';
+import AboutView from './views/AboutView';
 
 
 const App: React.FC = () => {
@@ -11,6 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/cards" element={<PokemonCardListView />} />
         <Route path="/summary" element={<SummaryView />} />
+        <Route path="/about" element={<AboutView />} />
       </Routes>
     </AppLayout>
   );

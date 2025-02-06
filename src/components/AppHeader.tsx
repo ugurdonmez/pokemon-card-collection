@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
+import { Link } from 'react-router-dom';
 import './AppHeader.css';
 
 const { Header } = Layout;
@@ -12,21 +13,15 @@ const AppHeader: React.FC = () => {
 
       {/* Custom Navigation Menu */}
       <nav className="custom-menu">
-        <a href="#" className="menu-item is-active">
+        <Link to="/summary" className="menu-item is-active">
+          Collection
+        </Link>
+        <Link to="/cards" className="menu-item">
           Cards
-        </a>
-        <a href="#" className="menu-item">
-          Games
-        </a>
-        <a href="#" className="menu-item">
-          Jobs
-        </a>
-        <a href="#" className="menu-item">
-          Gift Cards
-        </a>
-        <a href="#" className="menu-item">
-          Community
-        </a>
+        </Link>
+        <Link to="/about" className="menu-item">
+          About
+        </Link>
       </nav>
     </Header>
   );
