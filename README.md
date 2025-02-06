@@ -17,6 +17,7 @@ Future work
 - use all custum or antd (I would use tailwind if I have more time)
 - fix github action to deploy gh-pages when commit to main
 - cannot filter to energy in the list
+- inline css
 
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:

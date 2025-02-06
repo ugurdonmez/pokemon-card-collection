@@ -60,7 +60,9 @@ const AttackDamageSection: React.FC<AttackDamageSectionProps> = ({ damageBuckets
   return (
     <div>
       <h2>⚔️ Attack Damage Explained</h2>
-      <p>Attacks deal damage to the opponent...</p>
+      <p>In the Pokémon Trading Card Game, each Pokémon card can have one or more attacks. These attacks deal damage to the opponent's Pokémon, reducing their HP (Health Points). The amount of damage an attack deals is indicated on the card, usually next to the attack's name.</p>
+      <p>Attacks can have various effects in addition to dealing damage. Some attacks may cause status conditions like Poison or Paralysis, while others may have special effects like drawing additional cards or discarding energy from the opponent's Pokémon.</p>
+      <p>The damage dealt by an attack can be influenced by several factors, including the Pokémon's type, any attached energy cards, and any effects from Trainer cards or abilities. Understanding how to maximize attack damage is crucial for building effective strategies and winning battles.</p>
       <ReactECharts
         option={damageChartOptions}
         style={{ height: '500px', width: '100%' }}
