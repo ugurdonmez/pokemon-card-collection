@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
+import { useNavigate } from 'react-router-dom';
 
 interface HPDistributionSectionProps {
   hpBuckets: number[];
 }
 
 const HPDistributionSection: React.FC<HPDistributionSectionProps> = ({ hpBuckets }) => {
+  const navigate = useNavigate();
+
+  const handleChartClick = (params: any) => {
+    const hpRanges = ['0-50', '51-100', '101-150', '151-200', '201+'];
+    const hpRange = hpRanges[params.dataIndex];
+    navigate(`/cards?hp=${hpRange}&sort=name&sortOrder=asc`);
+  };
+
   const hpChartOptions: echarts.EChartsOption = {
     title: { text: 'HP Distribution', left: 'center' },
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
@@ -60,7 +69,14 @@ const HPDistributionSection: React.FC<HPDistributionSectionProps> = ({ hpBuckets
     <div>
       <h2>💪 What is HP (Health Points)?</h2>
       <p>HP represents a Pokémon’s endurance...</p>
-      <ReactECharts option={hpChartOptions} style={{ height: '500px', width: '100%' }} />
+      <p style={{ marginBottom: '20px', textAlign: 'center', fontStyle: 'italic' }}>
+        Click on the bar chart to see the Pokémon cards with the selected HP range.
+      </p>
+      <ReactECharts
+        option={hpChartOptions}
+        style={{ height: '500px', width: '100%' }}
+        onEvents={{ 'click': handleChartClick }}
+      />
     </div>
   );
 };
