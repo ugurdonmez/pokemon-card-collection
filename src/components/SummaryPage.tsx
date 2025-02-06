@@ -8,6 +8,7 @@ import './SummaryPage.css';
 import IntroSection from '@components/sections/IntroSection';
 import RaritySection from '@components/sections/RaritySection';
 import HPDistributionSection from './sections/HPDistributionSection';
+import CardTypesSection from './sections/CardTypesSection';
 
 // Define Types
 interface PokemonCard {
@@ -112,38 +113,6 @@ const SummaryPage: React.FC = () => {
     }
   }, [location.search]);
 
-  const typeChartOptions: echarts.EChartsOption = {
-    title: { text: 'Card Type Distribution', left: 'center' },
-    tooltip: { trigger: 'item' },
-    angleAxis: {
-      type: 'category',
-      data: Object.keys(typeCounts),
-      axisLine: { show: false },
-    },
-    radiusAxis: {
-      type: 'value',
-    },
-    polar: {},
-    series: [
-      {
-        type: 'bar',
-        data: Object.values(typeCounts),
-        coordinateSystem: 'polar',
-        itemStyle: {
-          color: (params) => {
-            const colors = ['#ff6384', '#36a2eb', '#ffce56'];
-            return colors[params.dataIndex % colors.length];
-          },
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)',
-        },
-      },
-    ],
-    animationEasing: 'elasticOut',
-    animationDelay: (idx) => idx * 100,
-  };
-
   const pokemonTypeChartOptions: echarts.EChartsOption = {
     title: { text: 'Pokémon Types Distribution', left: 'center' },
     tooltip: { trigger: 'item' },
@@ -187,7 +156,11 @@ const SummaryPage: React.FC = () => {
       text: <HPDistributionSection hpBuckets={hpBuckets} />,
       chart: null,
     },
-    { title: '📚 What are Pokémon Card Types?', text: 'There are three main types of Pokémon cards...', chart: typeChartOptions },
+    {
+      title: '📚 What are Pokémon Card Types?',
+      text: <CardTypesSection typeCounts={typeCounts} />,
+      chart: null,
+    },
     { title: '🔥 Ash’s Strongest Pokémon', text: 'These are the Pokémon with the highest HP...', chart: null, list: strongestPokemons.map((p) => `${p.name} - HP: ${p.hp}`) },
     { title: '⚔️ Attack Damage Explained', text: 'Attacks deal damage to the opponent...', chart: damageChartOptions },
     { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
