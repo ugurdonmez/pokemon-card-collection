@@ -17,6 +17,7 @@ const PokemonCardListView: React.FC = () => {
       dispatch(setLoading(true));
       try {
         const data = await import('../data/ash_collection.json');
+        // TODO: Type the data
         setCards(data.default as unknown as PokemonCard[]);
         setFilteredCards(data.default as unknown as PokemonCard[]);
         setSortedCards(data.default as unknown as PokemonCard[]);
