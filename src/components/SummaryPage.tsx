@@ -11,6 +11,8 @@ import HPDistributionSection from './sections/HPDistributionSection';
 import CardTypesSection from './sections/CardTypesSection';
 import StrongestPokemonSection from './sections/StrongestPokemonSection';
 import AttackDamageSection from './sections/AttackDamageSection';
+import CollectionSummarySection from './sections/CollectionSummarySection';
+import PokemonTypesSection from './sections/PokemonTypesSection';
 
 // Define Types
 interface PokemonCard {
@@ -115,25 +117,6 @@ const SummaryPage: React.FC = () => {
     }
   }, [location.search]);
 
-  const pokemonTypeChartOptions: echarts.EChartsOption = {
-    title: { text: 'Pokémon Types Distribution', left: 'center' },
-    tooltip: { trigger: 'item' },
-    series: [
-      {
-        type: 'pie',
-        radius: '70%',
-        data: Object.entries(pokemonTypeCounts).map(([type, count]) => ({ name: type, value: count })),
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)',
-        },
-      },
-    ],
-    animationEasing: 'elasticOut',
-    animationDelay: (idx) => idx * 100,
-  };
-
   const sectionsData = [
     {
       title: '🎴 Welcome to Ash’s Pokémon Card Collection!',
@@ -165,8 +148,16 @@ const SummaryPage: React.FC = () => {
       text: <AttackDamageSection damageBuckets={damageBuckets} />,
       chart: null,
     },
-    { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
-    { title: '🌊 Pokémon Types', text: 'Explore the distribution of different Pokémon types in the collection...', chart: pokemonTypeChartOptions },
+    {
+      title: '📦 Collection Summary',
+      text: <CollectionSummarySection totalCards={totalCards} />,
+      chart: null,
+    },
+    {
+      title: '🌊 Pokémon Types',
+      text: <PokemonTypesSection pokemonTypeCounts={pokemonTypeCounts} />,
+      chart: null,
+    },
   ];
 
   const handleNext = () => {
