@@ -48,7 +48,7 @@ const SummaryPage: React.FC = () => {
     const pokemonTypeMap: Record<string, number> = {};
     const hpValues: number[] = [];
     const damageValues: number[] = [];
-    let topHP: PokemonCard[] = [];
+    const topHP: PokemonCard[] = [];
 
     pokemonData.forEach((card) => {
       if (card.rarity) rarityMap[card.rarity] = (rarityMap[card.rarity] || 0) + 1;

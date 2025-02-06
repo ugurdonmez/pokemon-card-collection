@@ -11,9 +11,11 @@ Currently, two official plugins are available:
 
 Future work
 - better ui
-- add lint
+- add/fix lint
+- better typing
 - fix paths for import (sometimes @ or .)
 - use all custum or antd (I would use tailwind if I have more time)
+- fix github action to deploy gh-pages when commit to main
 
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:

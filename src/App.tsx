@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom';
 import SummaryView from './views/SummaryView';
 import AboutView from './views/AboutView';
 
-
 const App: React.FC = () => {
   return (
     <AppLayout>

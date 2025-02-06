@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../store/loadingSlice';
-import CardList from '../components/CardList';
+import CardList from '@components/CardList';
 import CardListFilters from '../components/CardListFilters';
-import { PokemonCard } from '@types';
+import PokemonCard from '../types/PokemonCard';
 
 const PokemonCardListView: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,9 +17,9 @@ const PokemonCardListView: React.FC = () => {
       dispatch(setLoading(true));
       try {
         const data = await import('../data/ash_collection.json');
-        setCards(data.default as PokemonCard[]);
-        setFilteredCards(data.default as PokemonCard[]);
-        setSortedCards(data.default as PokemonCard[]);
+        setCards(data.default as unknown as PokemonCard[]);
+        setFilteredCards(data.default as unknown as PokemonCard[]);
+        setSortedCards(data.default as unknown as PokemonCard[]);
       } catch (error) {
         console.error('Error fetching cards:', error);
       } finally {
@@ -52,7 +52,7 @@ const PokemonCardListView: React.FC = () => {
     setFilteredCards(filtered);
 
     // Apply sorting
-    let sorted = [...filtered];
+    const sorted = [...filtered];
     if (filters.sort) {
       sorted.sort((a, b) => {
         if (filters.sort === 'name') {
