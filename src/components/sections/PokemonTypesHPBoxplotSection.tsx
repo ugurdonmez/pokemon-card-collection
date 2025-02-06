@@ -6,14 +6,14 @@ interface PokemonHPBoxplotSectionProps {
 }
 
 const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokemonData }) => {
-  const [xAxisOption, setXAxisOption] = useState<'type' | 'rarity' | 'supertype'>('type');
+  const [xAxisOption, setXAxisOption] = useState<'types' | 'rarity' | 'supertype'>('types');
 
-  const groupByOption = (option: 'type' | 'rarity' | 'supertype') => {
+  const groupByOption = (option: 'types' | 'rarity' | 'supertype') => {
     const map: Record<string, number[]> = {};
     pokemonData.forEach((pokemon) => {
       if (pokemon.hp) {
         const hp = Number(pokemon.hp);
-        if (option === 'type' && pokemon.types) {
+        if (option === 'types' && pokemon.types) {
           pokemon.types.forEach((type) => {
             if (!map[type]) {
               map[type] = [];
@@ -80,9 +80,9 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
         <label>
           <input
             type="radio"
-            value="type"
-            checked={xAxisOption === 'type'}
-            onChange={() => setXAxisOption('type')}
+            value="types"
+            checked={xAxisOption === 'types'}
+            onChange={() => setXAxisOption('types')}
           />
           Type
         </label>
