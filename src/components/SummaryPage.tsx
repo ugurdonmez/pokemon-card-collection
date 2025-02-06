@@ -9,6 +9,7 @@ import IntroSection from '@components/sections/IntroSection';
 import RaritySection from '@components/sections/RaritySection';
 import HPDistributionSection from './sections/HPDistributionSection';
 import CardTypesSection from './sections/CardTypesSection';
+import StrongestPokemonSection from './sections/StrongestPokemonSection';
 
 // Define Types
 interface PokemonCard {
@@ -161,7 +162,11 @@ const SummaryPage: React.FC = () => {
       text: <CardTypesSection typeCounts={typeCounts} />,
       chart: null,
     },
-    { title: '🔥 Ash’s Strongest Pokémon', text: 'These are the Pokémon with the highest HP...', chart: null, list: strongestPokemons.map((p) => `${p.name} - HP: ${p.hp}`) },
+    {
+      title: '🔥 Ash’s Strongest Pokémon',
+      text: <StrongestPokemonSection strongestPokemons={strongestPokemons} />,
+      chart: null,
+    },
     { title: '⚔️ Attack Damage Explained', text: 'Attacks deal damage to the opponent...', chart: damageChartOptions },
     { title: '📦 Collection Summary', text: `Ash has collected **${totalCards} Pokémon cards**.`, chart: null },
     { title: '🌊 Pokémon Types', text: 'Explore the distribution of different Pokémon types in the collection...', chart: pokemonTypeChartOptions },
