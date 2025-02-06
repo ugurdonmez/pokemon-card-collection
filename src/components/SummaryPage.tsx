@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import pokemonData from '../data/ash_collection.json';
 import * as echarts from 'echarts';
 import './SummaryPage.css';
-import IntroSection from './sections/IntroSection';
+import IntroSection from '@components/sections/IntroSection';
 
 // Define Types
 interface PokemonCard {

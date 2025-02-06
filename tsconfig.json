@@ -8,7 +8,8 @@
       "@types": ["types/index"],
       "@types/*": ["types/*"],
       "@config": ["config/index"],
-      "@Vviews": ["views/index"],
+      "@views": ["views/index"],
+      "@data": ["data/index"],
 
     },
   },
