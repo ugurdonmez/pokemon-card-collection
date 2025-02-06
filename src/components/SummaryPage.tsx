@@ -6,6 +6,7 @@ import pokemonData from '../data/ash_collection.json';
 import * as echarts from 'echarts';
 import './SummaryPage.css';
 import IntroSection from '@components/sections/IntroSection';
+import RaritySection from '@components/sections/RaritySection';
 
 // Define Types
 interface PokemonCard {
@@ -109,19 +110,6 @@ const SummaryPage: React.FC = () => {
       setCurrentSection(sections.indexOf(section));
     }
   }, [location.search]);
-
-  // Chart Configurations
-  const rarityChartOptions: echarts.EChartsOption = {
-    title: { text: 'Pokémon Rarity Distribution', left: 'center' },
-    tooltip: { trigger: 'item' },
-    series: [
-      {
-        type: 'pie',
-        radius: ['40%', '80%'], // Inner radius and outer radius for donut chart
-        data: Object.entries(rarityCounts).map(([rarity, count]) => ({ name: rarity, value: count })),
-      },
-    ],
-  };
 
   const hpChartOptions: echarts.EChartsOption = {
     title: { text: 'HP Distribution', left: 'center' },
@@ -238,7 +226,11 @@ const SummaryPage: React.FC = () => {
       text: <IntroSection totalCards={totalCards} rarityCounts={rarityCounts} strongestPokemons={strongestPokemons} />,
       chart: null,
     },
-    { title: '🃏 Understanding Pokémon Rarity', text: 'Pokémon cards come in different rarities...', chart: rarityChartOptions },
+    {
+      title: '🃏 Understanding Pokémon Rarity',
+      text: <RaritySection rarityCounts={rarityCounts} />,
+      chart: null,
+    },
     { title: '💪 What is HP (Health Points)?', text: 'HP represents a Pokémon’s endurance...', chart: hpChartOptions },
     { title: '📚 What are Pokémon Card Types?', text: 'There are three main types of Pokémon cards...', chart: typeChartOptions },
     { title: '🔥 Ash’s Strongest Pokémon', text: 'These are the Pokémon with the highest HP...', chart: null, list: strongestPokemons.map((p) => `${p.name} - HP: ${p.hp}`) },
@@ -266,7 +258,7 @@ const SummaryPage: React.FC = () => {
       <div className="viewport">
         <AnimatePresence mode="wait">
           <motion.section key={currentSection} className="summary-section">
-            <h2>{sectionsData[currentSection].title}</h2>
+            {/* <h2>{sectionsData[currentSection].title}</h2> */}
             <div>{sectionsData[currentSection].text}</div>
             {sectionsData[currentSection].chart && <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '500px', width: '100%' }} />}
             {sectionsData[currentSection].list && <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>}
