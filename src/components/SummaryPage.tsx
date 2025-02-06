@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import pokemonData from '../data/ash_collection.json';
 import * as echarts from 'echarts';
 import './SummaryPage.css';
+import IntroSection from './sections/IntroSection';
 
 // Define Types
 interface PokemonCard {
@@ -235,24 +236,7 @@ const SummaryPage: React.FC = () => {
   const sectionsData = [
     {
       title: '🎴 Welcome to Ash’s Pokémon Card Collection!',
-      text: `
-        Welcome to the ultimate breakdown of Ash's Pokémon card collection! Here, you'll find detailed insights and fun facts about the cards Ash has collected over the years.
-        
-        **Fun Facts:**
-        - The collection includes a total of **${totalCards}** Pokémon cards.
-        - The rarest card in the collection is the **${Object.keys(rarityCounts).reduce((a, b) => rarityCounts[a] < rarityCounts[b] ? a : b, '')}** card.
-        - The Pokémon with the highest HP is **${strongestPokemons[0]?.name || 'N/A'}** with **${strongestPokemons[0]?.hp || 'N/A'} HP**.
-
-        **What to Expect:**
-        - **Rarity Distribution:** See how the cards are distributed across different rarity levels.
-        - **HP Distribution:** Understand the health points distribution of the Pokémon cards.
-        - **Card Types:** Explore the different types of cards in the collection.
-        - **Strongest Pokémon:** Discover the Pokémon with the highest HP.
-        - **Attack Damage:** Analyze the attack damage distribution of the Pokémon cards.
-        - **Collection Summary:** Get a summary of the entire collection.
-
-        Let's dive in and explore Ash's amazing Pokémon card collection!
-      `,
+      text: <IntroSection totalCards={totalCards} rarityCounts={rarityCounts} strongestPokemons={strongestPokemons} />,
       chart: null,
     },
     { title: '🃏 Understanding Pokémon Rarity', text: 'Pokémon cards come in different rarities...', chart: rarityChartOptions },
@@ -284,7 +268,7 @@ const SummaryPage: React.FC = () => {
         <AnimatePresence mode="wait">
           <motion.section key={currentSection} className="summary-section">
             <h2>{sectionsData[currentSection].title}</h2>
-            <p>{sectionsData[currentSection].text}</p>
+            <div>{sectionsData[currentSection].text}</div>
             {sectionsData[currentSection].chart && <ReactECharts option={sectionsData[currentSection].chart} style={{ height: '500px', width: '100%' }} />}
             {sectionsData[currentSection].list && <ul>{sectionsData[currentSection].list.map((item, index) => <li key={index}>{item}</li>)}</ul>}
           </motion.section>
