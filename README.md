@@ -9,6 +9,13 @@ Currently, two official plugins are available:
 
 ## Expanding the ESLint configuration
 
+Future work
+- better ui
+- add lint
+- fix paths for import (sometimes @ or .)
+- use all custum or antd (I would use tailwind if I have more time)
+
+
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
 - Configure the top-level `parserOptions` property like this:
