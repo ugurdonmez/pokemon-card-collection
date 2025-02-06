@@ -82,7 +82,6 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
           <Select.Option value="Common">Common</Select.Option>
           <Select.Option value="Uncommon">Uncommon</Select.Option>
           <Select.Option value="Rare">Rare</Select.Option>
-          <Select.Option value="Legendary">Legendary</Select.Option>
         </Select>
       </div>
 
