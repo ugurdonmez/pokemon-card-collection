@@ -61,7 +61,7 @@ const PokemonCardListView: React.FC = () => {
         } else if (filters.sort === 'hp') {
           return (parseInt(a.hp || '0') - parseInt(b.hp || '0'));
         } else if (filters.sort === 'rarity') {
-          return a.rarity.localeCompare(b.rarity);
+          return (a.rarity || '').localeCompare(b.rarity || '');
         }
         return 0;
       });
