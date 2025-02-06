@@ -48,6 +48,9 @@ const RaritySection: React.FC<RaritySectionProps> = ({ rarityCounts }) => {
     <div>
       <h2>🃏 Understanding Pokémon Rarity</h2>
       <p>Pokémon cards come in different rarities...</p>
+      <p style={{ marginBottom: '20px', textAlign: 'center', fontStyle: 'italic' }}>
+        Click on the pie chart to see the Pokémon cards with the selected rarity.
+      </p>
       <ReactECharts
         option={rarityChartOptions}
         style={{ height: '500px', width: '100%' }}
