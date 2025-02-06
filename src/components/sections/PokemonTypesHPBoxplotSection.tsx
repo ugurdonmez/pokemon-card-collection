@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface PokemonHPBoxplotSectionProps {
   pokemonData: { types?: string[]; hp?: string; rarity?: string; supertype?: string }[];
@@ -8,7 +8,13 @@ interface PokemonHPBoxplotSectionProps {
 
 const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokemonData }) => {
   const navigate = useNavigate();
-  const [xAxisOption, setXAxisOption] = useState<'types' | 'rarity' | 'supertype'>('types');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialXAxisOption = (searchParams.get('xAxisOption') as 'types' | 'rarity' | 'supertype') || 'types';
+  const [xAxisOption, setXAxisOption] = useState<'types' | 'rarity' | 'supertype'>(initialXAxisOption);
+
+  useEffect(() => {
+    setSearchParams({ xAxisOption });
+  }, [xAxisOption, setSearchParams]);
 
   const groupByOption = (option: 'types' | 'rarity' | 'supertype') => {
     const map: Record<string, number[]> = {};
