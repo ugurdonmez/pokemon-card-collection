@@ -1,27 +1,33 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
+import { useNavigate } from 'react-router-dom';
 
 interface CardTypesSectionProps {
   typeCounts: Record<string, number>;
 }
 
 const CardTypesSection: React.FC<CardTypesSectionProps> = ({ typeCounts }) => {
+  const navigate = useNavigate();
+
+  const handleChartClick = (params: any) => {
+    const cardTypes = ['Pokémon', 'Trainer', 'Energy'];
+    const cardType = cardTypes[params.dataIndex];
+    navigate(`/cards?type=${cardType}&sort=name&sortOrder=asc`);
+  };
+
   const typeChartOptions: echarts.EChartsOption = {
-    title: { text: 'Card Type Distribution', left: 'center' },
+    title: { text: 'Pokémon Card Types Distribution', left: 'center' },
     tooltip: { trigger: 'item' },
     angleAxis: {
       type: 'category',
-      data: Object.keys(typeCounts),
-      axisLine: { show: false }, // Remove the x-axis line
+      data: ['Pokémon', 'Trainer', 'Energy'],
     },
-    radiusAxis: {
-      type: 'value',
-    },
+    radiusAxis: {},
     polar: {},
     series: [
       {
         type: 'bar',
-        data: Object.values(typeCounts),
+        data: Object.entries(typeCounts).map(([type, count]) => ({ name: type, value: count })),
         coordinateSystem: 'polar',
         itemStyle: {
           color: (params) => {
@@ -42,7 +48,14 @@ const CardTypesSection: React.FC<CardTypesSectionProps> = ({ typeCounts }) => {
     <div>
       <h2>📚 What are Pokémon Card Types?</h2>
       <p>There are three main types of Pokémon cards...</p>
-      <ReactECharts option={typeChartOptions} style={{ height: '500px', width: '100%' }} />
+      <p style={{ marginBottom: '20px', textAlign: 'center', fontStyle: 'italic' }}>
+        Click on the chart to see the Pokémon cards of the selected type.
+      </p>
+      <ReactECharts
+        option={typeChartOptions}
+        style={{ height: '500px', width: '100%' }}
+        onEvents={{ 'click': handleChartClick }}
+      />
     </div>
   );
 };
