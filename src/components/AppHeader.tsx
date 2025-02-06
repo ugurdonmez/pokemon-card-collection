@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './AppHeader.css';
 
 const { Header } = Layout;
@@ -13,15 +13,15 @@ const AppHeader: React.FC = () => {
 
       {/* Custom Navigation Menu */}
       <nav className="custom-menu">
-        <Link to="/summary" className="menu-item is-active">
+        <NavLink to="/summary" className={({ isActive }) => isActive ? 'menu-item is-active' : 'menu-item'}>
           Collection
-        </Link>
-        <Link to="/cards" className="menu-item">
+        </NavLink>
+        <NavLink to="/cards" className={({ isActive }) => isActive ? 'menu-item is-active' : 'menu-item'}>
           Cards
-        </Link>
-        <Link to="/about" className="menu-item">
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? 'menu-item is-active' : 'menu-item'}>
           About
-        </Link>
+        </NavLink>
       </nav>
     </Header>
   );
