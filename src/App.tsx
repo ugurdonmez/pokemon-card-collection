@@ -11,6 +11,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/cards" element={<PokemonCardListView />} />
         <Route path="/summary" element={<SummaryView />} />
+        {/* TODO: fix route / and /summary */}
+        <Route path="/" element={<SummaryView />} />
         <Route path="/about" element={<AboutView />} />
       </Routes>
     </AppLayout>
