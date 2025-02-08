@@ -4,6 +4,17 @@ A web application for exploring Pokémon cards, their details, and distributions
 
 ---
 
+## Deployment
+
+This project is hosted on **GitHub Pages**. You can access the live version of the application here:
+
+👉 [Pokémon Card Collection](https://ugurdonmez.github.io/pokemon-card-collection)
+
+### Development Notes for GitHub Pages
+1. The app is deployed to the `gh-pages` branch via GitHub Actions.
+2. Make sure the `homepage` field in `package.json` is set to:
+
+
 ## Prerequisites
 
 Before starting, ensure you have the following installed:
