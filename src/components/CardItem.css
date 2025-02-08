@@ -3,6 +3,9 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background: white;
+    width: 350px;
+    margin: 16px;
 }
 
 .card-container:hover {
@@ -12,9 +15,76 @@
 
 .card-image {
     width: 100%;
-    border-bottom: 1px solid #ddd;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ddd;
 }
 
 .card-content {
     padding: 12px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card-subheader {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.card-types {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.card-attacks h4, 
+.card-stats h4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.card-attacks p {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.card-stats {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 8px 0;
+}
+
+.weakness-section, .resistance-section {
+    text-align: center;
+}
+
+/* Type Colors */
+.type-fire { background: #f08030 !important; color: white !important; }
+.type-water { background: #6890f0 !important; color: white !important; }
+.type-electric { background: #f8d030 !important; color: black !important; }
+.type-grass { background: #78c850 !important; color: white !important; }
+.type-psychic { background: #f85888 !important; color: white !important; }
+.type-fighting { background: #c03028 !important; color: white !important; }
+.type-dark { background: #705848 !important; color: white !important; }
+.type-fairy { background: #ee99ac !important; color: white !important; }
+
+/* Flavor Text */
+.flavor-text {
+    font-style: italic;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-top: 10px;
 }
