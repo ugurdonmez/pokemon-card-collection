@@ -15,7 +15,12 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
   const [xAxisOption, setXAxisOption] = useState<'types' | 'rarity' | 'supertype'>(initialXAxisOption);
 
   useEffect(() => {
-    setSearchParams({ xAxisOption });
+    // Preserve existing params and update only xAxisOption
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set('xAxisOption', xAxisOption);
+      return newParams;
+    });
   }, [xAxisOption, setSearchParams]);
 
   const groupByOption = (option: 'types' | 'rarity' | 'supertype') => {

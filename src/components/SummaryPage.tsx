@@ -7,9 +7,7 @@ import IntroSection from '@components/sections/IntroSection';
 import RaritySection from '@components/sections/RaritySection';
 import HPDistributionSection from '@components/sections/HPDistributionSection';
 import CardTypesSection from '@components/sections/CardTypesSection';
-import StrongestPokemonSection from '@components/sections/StrongestPokemonSection';
 import AttackDamageSection from '@components/sections/AttackDamageSection';
-import CollectionSummarySection from '@components/sections/CollectionSummarySection';
 import PokemonTypesSection from '@components/sections/PokemonTypesSection';
 import PokemonTypesHPBoxplotSection from '@components/sections/PokemonTypesHPBoxplotSection';
 
@@ -23,8 +21,6 @@ interface PokemonCard {
   attacks?: { damage?: string }[];
 }
 
-// Define Sections
-// const sections = ['intro', 'type', 'rarity', 'hp', 'strongest', 'damage', 'collectionSize', 'pokemonTypes', 'hpBoxplot'];
 const sections = ['intro', 'type', 'rarity', 'hp', 'damage', 'pokemonTypes', 'hpBoxplot'];
 
 
@@ -162,8 +158,6 @@ const SummaryPage: React.FC = () => {
 
   return (
     <div className="summary-container">
-      {/* <h1>📜 Ash's Pokémon Collection Summary</h1> */}
-
       <div className="viewport">
         <AnimatePresence mode="wait">
           <motion.section key={currentSection} className="summary-section">
