@@ -1,0 +1,106 @@
+/* Modal Content */
+.pokemon-modal .ant-modal-content {
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 800px;
+}
+
+.pokemon-modal .ant-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Header Section */
+.modal-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Image Section */
+.image-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.pokemon-image {
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Details Section */
+.details-section {
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+}
+
+/* Info Header (Rarity & HP) */
+.info-header {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* Pokémon Types */
+.types-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* Evolution Info */
+.evolution-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+/* Attacks Section */
+.attacks-container h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.attacks-container p {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+/* Stats Section */
+.stats-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.stat-section {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-section h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Flavor Text */
+.flavor-text {
+    font-size: 16px;
+    font-style: italic;
+    margin-top: 16px;
+    text-align: center;
+}
