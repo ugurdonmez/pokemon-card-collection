@@ -160,7 +160,7 @@ const SummaryPage: React.FC = () => {
 
   return (
     <div className="summary-container">
-      <h1>📜 Ash's Pokémon Collection Summary</h1>
+      {/* <h1>📜 Ash's Pokémon Collection Summary</h1> */}
 
       <div className="viewport">
         <AnimatePresence mode="wait">
