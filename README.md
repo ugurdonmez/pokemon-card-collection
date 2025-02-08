@@ -1,43 +1,109 @@
+# Pokémon Card Collection
 
-Future work
-- better ui
-- add/fix lint
-- better typing
-- fix paths for import (sometimes @ or .)
-- use all custum or antd (I would use tailwind if I have more time)
-- fix github action to deploy gh-pages when commit to main
-- cannot filter to energy in the list
-- inline css
-- update favicon
-- update seo information
-- responsive desing (I have quite wide screen so I usualy work the done in w:1600px h:1600px, I do not have time to fix small screen)
-- RaritySection.tsx // TODO: fix the space between chart and title
-- navigation error in boxplot section
+A web application for exploring Pokémon cards, their details, and distributions. Built with modern web technologies, this project provides an interactive and visually rich experience.
 
+---
 
+## Prerequisites
 
-https://echarts.apache.org/examples/en/
-https://echarts.apache.org/en/option.html#title
+Before starting, ensure you have the following installed:
 
+- **Node.js**: v23+ (for `yarn` to work properly)
+- **Yarn**: Latest stable version
+- **Docker**: If you prefer containerized deployment
+- **Git**: To clone the repository
 
-how to start
+---
 
-option 1 recommended
+## Technologies Used
 
-yarn
-yarn dev
-navigate http://localhost:5173/pokemon-card-collection/
+- **React**: UI framework
+- **Ant Design**: Component library for UI
+- **ECharts**: Visualization library for data visualization
+- **TypeScript**: Static typing
+- **Docker**: Containerized deployment
+- **Vite**: Development build tool for faster builds
+- **CSS Modules**: Scoped CSS for styling
 
-option 2
+---
 
-docker build -t pokemon-card-collection .
-docker run -p 80:80 pokemon-card-collection
+## How to Start
 
-navigate http://localhost/pokemon-card-collection/
+### Option 1 (Recommended): Local Development
+1. Install dependencies:
+   ```bash
+   yarn
+    ```
+2. Start the development server:
+   ```bash
+   yarn dev
+    ``` 
 
-option 3
+3. Open your browser and navigate to:
+   ```bash
+   http://localhost:5173/pokemon-card-collection/
+    ``` 
 
-docker-compose build
-docker-compose up
+### Option 2: Docker Standalone
+1. Build the Docker image:
+   ```bash
+   docker build -t pokemon-card-collection .
+    ```
+2. Run the container:
+   ```bash
+   docker run -p 80:80 pokemon-card-collection
+    ``` 
 
-navigate http://localhost/pokemon-card-collection/
+3. Open your browser and navigate to:
+   ```bash
+   http://localhost/pokemon-card-collection/
+    ``` 
+
+### Option 2: Docker Compose
+1. Build the Docker image using Docker Compose:
+   ```bash
+   docker-compose build
+    ```
+2. Run the Docker image using Docker Compose:
+   ```bash
+   docker run -p 80:80 pokemon-card-collection
+    ``` 
+
+3. Open your browser and navigate to:
+   ```bash
+   http://localhost/pokemon-card-collection/
+    ``` 
+
+## Future Work
+
+### UI Enhancements
+- **Better UI**: Improve the overall look and feel.
+- **Responsive Design**: Currently optimized for wide screens (1600px width). Needs adjustments for smaller screens.
+- **Custom or Ant Design**: Finalize between fully custom styles or sticking to Ant Design. (Would have used Tailwind if more time was available.)
+- **Fix Chart Issues**: Address spacing issues, such as in `RaritySection.tsx`.
+
+### Functionality Improvements
+- **Filter Fixes**: Resolve filtering issues, e.g., cannot filter to "Energy" in the card list.
+- **Boxplot Navigation Error**: Fix the navigation bug in the boxplot section.
+
+### Technical Updates
+- **Linting**: Add or fix the linter configuration.
+- **Better Typing**: Improve TypeScript typing across the project.
+- **Fix Path Imports**: Normalize imports (e.g., `@` vs `.`).
+- **Inline CSS**: Minimize and fix instances of inline CSS.
+- **Unit Test**: Add more unit tests
+
+### Deployment
+- **GitHub Actions**: Automate deployment to GitHub Pages on commits to `main`.
+- **SEO Updates**: Update meta information for better search engine optimization.
+
+---
+
+## References
+- **ECharts Examples**: [ECharts Examples](https://echarts.apache.org/examples/en/)
+- **ECharts Options**: [ECharts Options Documentation](https://echarts.apache.org/en/option.html#title)
+
+---
+
+## License
+This project is licensed under the MIT License.
