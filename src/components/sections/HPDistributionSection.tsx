@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useNavigate } from 'react-router-dom';
+import './HPDistributionSection.css';
 
 interface HPDistributionSectionProps {
   hpBuckets: number[];
@@ -16,18 +17,34 @@ const HPDistributionSection: React.FC<HPDistributionSectionProps> = ({ hpBuckets
   };
 
   const hpChartOptions: echarts.EChartsOption = {
-    title: { text: 'HP Distribution', left: 'center' },
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    title: {
+      text: 'HP Distribution',
+      left: 'center',
+      textStyle: { fontSize: 20, color: '#333' },
+      padding: [0, 0, 20, 0], // Add space between title and chart
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      backgroundColor: 'rgba(50, 50, 50, 0.7)',
+      borderColor: '#fff',
+      borderWidth: 1,
+      textStyle: { color: '#fff' },
+    },
     xAxis: {
       type: 'category',
       data: ['0-50', '51-100', '101-150', '151-200', '201+'],
       name: 'HP Range',
       axisTick: { alignWithLabel: true },
-      axisLine: { show: false }, // Remove the x-axis line
+      axisLine: { show: false },
+      nameTextStyle: { fontSize: 14, color: '#666' },
     },
     yAxis: {
       type: 'value',
       name: 'Number of Pokémon',
+      nameTextStyle: { fontSize: 14, color: '#666' },
+      axisLine: { show: false },
+      splitLine: { lineStyle: { type: 'dashed', color: '#ddd' } },
     },
     series: [
       {
@@ -46,11 +63,29 @@ const HPDistributionSection: React.FC<HPDistributionSectionProps> = ({ hpBuckets
               colorStops: [
                 {
                   offset: 0,
-                  color: index === 0 ? '#ff6384' : index === 1 ? '#36a2eb' : index === 2 ? '#ffce56' : index === 3 ? '#4bc0c0' : '#9966ff',
+                  color:
+                    index === 0
+                      ? '#ff6384'
+                      : index === 1
+                      ? '#36a2eb'
+                      : index === 2
+                      ? '#ffce56'
+                      : index === 3
+                      ? '#4bc0c0'
+                      : '#9966ff',
                 },
                 {
                   offset: 1,
-                  color: index === 0 ? '#ff9aa2' : index === 1 ? '#9ad0f5' : index === 2 ? '#ffe29a' : index === 3 ? '#a3e4e4' : '#c3a6ff',
+                  color:
+                    index === 0
+                      ? '#ff9aa2'
+                      : index === 1
+                      ? '#9ad0f5'
+                      : index === 2
+                      ? '#ffe29a'
+                      : index === 3
+                      ? '#a3e4e4'
+                      : '#c3a6ff',
                 },
               ],
             },
@@ -66,17 +101,23 @@ const HPDistributionSection: React.FC<HPDistributionSectionProps> = ({ hpBuckets
   };
 
   return (
-    <div>
-      <h2>💪 What is HP (Health Points)?</h2>
-      <p>HP represents a Pokémon’s endurance...</p>
-      <p style={{ marginBottom: '20px', textAlign: 'center', fontStyle: 'italic' }}>
-        Click on the bar chart to see the Pokémon cards with the selected HP range.
-      </p>
-      <ReactECharts
-        option={hpChartOptions}
-        style={{ height: '500px', width: '100%' }}
-        onEvents={{ 'click': handleChartClick }}
-      />
+    <div className="hp-distribution-section">
+      <div className="section-header">
+        <h2 className="section-title">💪 HP Distribution</h2>
+        <p className="section-description">
+          HP (Health Points) represents a Pokémon’s endurance and ability to withstand attacks. Check out the distribution below!
+        </p>
+        <p className="highlight">
+          <em>Click on a bar to see Pokémon cards within the selected HP range.</em>
+        </p>
+      </div>
+      <div className="chart-container">
+        <ReactECharts
+          option={hpChartOptions}
+          style={{ height: '400px', width: '100%' }}
+          onEvents={{ click: handleChartClick }}
+        />
+      </div>
     </div>
   );
 };
