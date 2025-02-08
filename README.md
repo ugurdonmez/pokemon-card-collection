@@ -19,10 +19,25 @@ Future work
 https://echarts.apache.org/examples/en/
 https://echarts.apache.org/en/option.html#title
 
+
+how to start
+
+option 1 recommended
+
+yarn
+yarn dev
+navigate http://localhost:5173/pokemon-card-collection/
+
+option 2
+
 docker build -t pokemon-card-collection .
 docker run -p 80:80 pokemon-card-collection
 
+navigate http://localhost/pokemon-card-collection/
 
+option 3
 
 docker-compose build
 docker-compose up
+
+navigate http://localhost/pokemon-card-collection/
