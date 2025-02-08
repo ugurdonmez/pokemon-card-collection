@@ -22,6 +22,7 @@ Future work
 - update seo information
 - responsive desing (I have quite wide screen so I usualy work the done in w:1600px h:1600px, I do not have time to fix small screen)
 - RaritySection.tsx // TODO: fix the space between chart and title
+- navigation error in boxplot section
 
 
 
