@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Select, Slider, Input, Checkbox } from 'antd';
 import { useSearchParams } from 'react-router-dom';
 import './CardListFilters.css';
+import { Filters } from '@types';
 
 interface CardListFiltersProps {
-  onFilterChange: (filters: any) => void;
+  onFilterChange: (filters: Filters) => void;
 }
 
 const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => {
@@ -17,24 +18,36 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
     searchParams.get("hp")?.split("-").map(Number) as [number, number] || [0, 300]
   );
   const [name, setName] = useState(searchParams.get("name") || "");
-  const [sort, setSort] = useState(searchParams.get("sort") || "name");
-  const [sortOrder, setSortOrder] = useState(searchParams.get("sortOrder") || "asc");
+  const [sort, setSort] = useState<"name" | "hp" | "rarity">(searchParams.get("sort") as "name" | "hp" | "rarity" || "name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">(searchParams.get("sortOrder") as "asc" | "desc" || "asc");
 
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
 
-    if (rarity.length) newParams.set("rarity", rarity.join(","));
-    else newParams.delete("rarity");
+    if (rarity.length) { 
+      newParams.set("rarity", rarity.join(","));
+    } else { 
+      newParams.delete("rarity"); 
+    }
 
-    if (cardType.length) newParams.set("type", cardType.join(","));
-    else newParams.delete("type");
+    if (cardType.length) { 
+      newParams.set("type", cardType.join(",")); 
+    } else { 
+      newParams.delete("type"); 
+    }
 
-    if (pokemonType.length) newParams.set("pokemonType", pokemonType.join(","));
-    else newParams.delete("pokemonType");
+    if (pokemonType.length) { 
+      newParams.set("pokemonType", pokemonType.join(",")); 
+    } else { 
+      newParams.delete("pokemonType"); 
+    }
 
-    newParams.set("hp", `${hpRange[0]}-${hpRange[1]}`);
-    if (name) newParams.set("name", name);
-    else newParams.delete("name");
+    newParams.set("hp", `${hpRange[0]}-${hpRange[1]}`); 
+    if (name) { 
+      newParams.set("name", name);
+    } else { 
+      newParams.delete("name"); 
+    }
 
     newParams.set("sort", sort);
     newParams.set("sortOrder", sortOrder);
