@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Radio } from 'antd';
+import './PokemonHPBoxplotSection.css';
 
 interface PokemonHPBoxplotSectionProps {
   pokemonData: { types?: string[]; hp?: string; rarity?: string; supertype?: string }[];
@@ -74,22 +76,31 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
   };
 
   const boxplotChartOptions: echarts.EChartsOption = {
-    title: { text: 'HP Distribution by Pokémon', left: 'center' },
+    title: {
+      text: 'HP Distribution by Pokémon',
+      left: 'center',
+      textStyle: { fontSize: 20, color: '#333' },
+      padding: [0, 0, 20, 0],
+    },
     tooltip: { trigger: 'item' },
     xAxis: {
       type: 'category',
       data: categories,
       name: xAxisOption.charAt(0).toUpperCase() + xAxisOption.slice(1),
+      nameTextStyle: { fontSize: 14, color: '#666' },
     },
     yAxis: {
       type: 'value',
       name: 'HP',
+      nameTextStyle: { fontSize: 14, color: '#666' },
+      splitLine: { lineStyle: { type: 'dashed', color: '#ddd' } },
     },
     series: [
       {
         name: 'boxplot',
         type: 'boxplot',
         data: data,
+        itemStyle: { borderWidth: 1.5, borderColor: '#333' },
       },
     ],
     animationEasing: 'elasticOut',
@@ -97,43 +108,33 @@ const PokemonHPBoxplotSection: React.FC<PokemonHPBoxplotSectionProps> = ({ pokem
   };
 
   return (
-    <div>
-      <h2>📊 HP Distribution by Pokémon</h2>
-      <p>Explore the HP distribution of different Pokémon in the collection...</p>
-      <div>
-        <label>
-          <input
-            type="radio"
-            value="types"
-            checked={xAxisOption === 'types'}
-            onChange={() => setXAxisOption('types')}
-          />
-          Type
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="rarity"
-            checked={xAxisOption === 'rarity'}
-            onChange={() => setXAxisOption('rarity')}
-          />
-          Rarity
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="supertype"
-            checked={xAxisOption === 'supertype'}
-            onChange={() => setXAxisOption('supertype')}
-          />
-          Supertype
-        </label>
+    <div className="pokemon-hp-boxplot-section">
+      <div className="section-header">
+        <h2 className="section-title">📊 HP Distribution by Pokémon</h2>
+        <p className="section-description">
+          Explore the HP distribution of different Pokémon in the collection.
+        </p>
+        <p className="highlight">
+          <em>Choose a grouping option to analyze the data.</em>
+        </p>
       </div>
-      <ReactECharts
-        option={boxplotChartOptions}
-        style={{ height: '500px', width: '100%' }}
-        onEvents={{ 'click': handleChartClick }}
-      />
+      <Radio.Group
+        value={xAxisOption}
+        onChange={(e) => setXAxisOption(e.target.value)}
+        className="radio-group"
+        buttonStyle="solid"
+      >
+        <Radio.Button value="types">Type</Radio.Button>
+        <Radio.Button value="rarity">Rarity</Radio.Button>
+        <Radio.Button value="supertype">Supertype</Radio.Button>
+      </Radio.Group>
+      <div className="chart-container">
+        <ReactECharts
+          option={boxplotChartOptions}
+          style={{ height: '400px', width: '100%' }}
+          onEvents={{ click: handleChartClick }}
+        />
+      </div>
     </div>
   );
 };
