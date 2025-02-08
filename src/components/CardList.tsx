@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { List, Empty, Pagination } from 'antd';
+import { List, Empty, Pagination, Typography } from 'antd';
 import CardItem from '@components/CardItem';
 import { PokemonCard } from '@types';
-import './CardList.css'; 
+import './CardList.css';
+
+const { Text } = Typography;
 
 interface CardListProps {
   cards: PokemonCard[];
@@ -23,6 +25,10 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
 
   return (
     <div className="card-list-container">
+      <div className="card-list-header">
+        <Text className="card-count">{cards.length} Pokémon Cards Found</Text>
+      </div>
+
       {cards.length > 0 ? (
         <>
           <List
