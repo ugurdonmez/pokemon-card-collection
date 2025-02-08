@@ -1,64 +1,70 @@
 .intro-section {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #333;
-  font-family: 'Arial', sans-serif;
-  animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  color: #444;
+  font-family: 'Poppins', sans-serif;
+}
+
+.intro-header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .intro-title {
-  font-size: 2.5em;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.intro-text {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.fun-facts, .what-to-expect {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.fun-facts h3, .what-to-expect h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  font-weight: bold;
   color: #333;
 }
 
-.fun-facts ul, .what-to-expect ul {
+.intro-description {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+.intro-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #f76c6c;
+}
+
+.card ul {
   list-style-type: none;
   padding: 0;
 }
 
-.fun-facts li, .what-to-expect li {
-  font-size: 1.1em;
+.card li {
+  font-size: 1.1rem;
   margin-bottom: 10px;
-  color: #333;
 }
 
-.intro-footer {
-  font-size: 1.2em;
-  text-align: center;
-  color: #fff;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 768px) {
+  .intro-content {
+    grid-template-columns: 1fr;
   }
 }

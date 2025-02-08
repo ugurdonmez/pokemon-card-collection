@@ -24,7 +24,7 @@ interface PokemonCard {
 }
 
 // Define Sections
-const sections = ['intro', 'rarity', 'hp', 'type', 'strongest', 'damage', 'collectionSize', 'pokemonTypes', 'hpBoxplot'];
+const sections = ['intro', 'type', 'rarity', 'hp', 'strongest', 'damage', 'collectionSize', 'pokemonTypes', 'hpBoxplot'];
 
 const SummaryPage: React.FC = () => {
   const navigate = useNavigate();
@@ -121,13 +121,13 @@ const SummaryPage: React.FC = () => {
       text: <IntroSection totalCards={totalCards} rarityCounts={rarityCounts} strongestPokemons={strongestPokemons} />,
     },
     {
+      text: <CardTypesSection typeCounts={typeCounts} />,
+    },
+    {
       text: <RaritySection rarityCounts={rarityCounts} />,
     },
     {
       text: <HPDistributionSection hpBuckets={hpBuckets} />,
-    },
-    {
-      text: <CardTypesSection typeCounts={typeCounts} />,
     },
     {
       text: <StrongestPokemonSection strongestPokemons={strongestPokemons} />,
