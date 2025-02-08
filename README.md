@@ -96,12 +96,16 @@ Before starting, ensure you have the following installed:
 ### Deployment
 - **GitHub Actions**: Automate deployment to GitHub Pages on commits to `main`.
 - **SEO Updates**: Update meta information for better search engine optimization.
+- **nginx**: Fix nginx redirect issue.
 
 ---
 
 ## References
 - **ECharts Examples**: [ECharts Examples](https://echarts.apache.org/examples/en/)
 - **ECharts Options**: [ECharts Options Documentation](https://echarts.apache.org/en/option.html#title)
+- **Ant Desing**: [Ant Desing](https://ant.design/docs/react/getting-started)
+- **Vite**: [Vite](https://vite.dev/guide/)
+
 
 ---
 
