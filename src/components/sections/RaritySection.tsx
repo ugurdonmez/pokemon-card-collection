@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useNavigate } from 'react-router-dom';
+import './RaritySection.css';
 
 interface RaritySectionProps {
   rarityCounts: Record<string, number>;
@@ -12,14 +13,25 @@ const RaritySection: React.FC<RaritySectionProps> = ({ rarityCounts }) => {
   const handleChartClick = (params: any) => {
     if (!params.name) return;
 
-    if (params.name === 'Common' || params.name === 'Uncommon' || params.name === 'Rare') {
+    if (['Common', 'Uncommon', 'Rare'].includes(params.name)) {
       navigate(`/cards?hp=0-300&sort=name&sortOrder=asc&rarity=${params.name}`);
     }
   };
 
   const rarityChartOptions: echarts.EChartsOption = {
-    title: { text: 'Pokémon Rarity Distribution', left: 'center' },
-    tooltip: { trigger: 'item' },
+    title: {
+      text: 'Pokémon Rarity Distribution',
+      left: 'center',
+      textStyle: { fontSize: 20, color: '#333' },
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: '{b}: {c} ({d}%)',
+      backgroundColor: 'rgba(50, 50, 50, 0.7)',
+      borderColor: '#fff',
+      borderWidth: 1,
+      textStyle: { color: '#fff' },
+    },
     series: [
       {
         type: 'pie',
@@ -39,23 +51,29 @@ const RaritySection: React.FC<RaritySectionProps> = ({ rarityCounts }) => {
         },
       },
     ],
-    color: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'],
+    color: ['#f76c6c', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'],
     animationEasing: 'elasticOut',
     animationDelay: (idx) => idx * 100,
   };
 
   return (
-    <div>
-      <h2>🃏 Understanding Pokémon Rarity</h2>
-      <p>Pokémon cards come in different rarities...</p>
-      <p style={{ marginBottom: '20px', textAlign: 'center', fontStyle: 'italic' }}>
-        Click on the pie chart to see the Pokémon cards with the selected rarity.
-      </p>
-      <ReactECharts
-        option={rarityChartOptions}
-        style={{ height: '500px', width: '100%' }}
-        onEvents={{ 'click': handleChartClick }}
-      />
+    <div className="rarity-section">
+      <div className="section-header">
+        <h2 className="section-title">🃏 Pokémon Rarity Distribution</h2>
+        <p className="section-description">
+          Pokémon cards come in different rarities that define their uniqueness and value. Explore the distribution below!
+        </p>
+        <p className="highlight">
+          <em>Click on the chart segments to view cards of the selected rarity.</em>
+        </p>
+      </div>
+      <div className="chart-container">
+        <ReactECharts
+          option={rarityChartOptions}
+          style={{ height: '400px', width: '100%' }}
+          onEvents={{ click: handleChartClick }}
+        />
+      </div>
     </div>
   );
 };
