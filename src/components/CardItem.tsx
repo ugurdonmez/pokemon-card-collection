@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Tag, Tooltip, Modal } from 'antd';
+import { Card, Tag } from 'antd';
 import { PokemonCard } from '@types';
 import './CardItem.css';
 import PokemonModal from './modals/PokemonModal';
