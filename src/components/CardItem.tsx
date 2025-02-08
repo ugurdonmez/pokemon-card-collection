@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { PokemonCard } from '@types';
+import './CardItem.css';
 
 
 interface CardItemProps {

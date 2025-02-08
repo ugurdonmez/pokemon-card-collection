@@ -22,63 +22,39 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
 
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
-  
-    if (rarity.length) {
-      newParams.set("rarity", rarity.join(","));
-    } else {
-      newParams.delete("rarity");
-    }
-  
-    if (cardType.length) { 
-      newParams.set("type", cardType.join(",")); 
-    } else { 
-      newParams.delete("type");
-    }
-  
-    if (pokemonType.length) { 
-      newParams.set("pokemonType", pokemonType.join(",")); 
-    } else { 
-      newParams.delete("pokemonType"); 
-    }
-  
+
+    if (rarity.length) newParams.set("rarity", rarity.join(","));
+    else newParams.delete("rarity");
+
+    if (cardType.length) newParams.set("type", cardType.join(","));
+    else newParams.delete("type");
+
+    if (pokemonType.length) newParams.set("pokemonType", pokemonType.join(","));
+    else newParams.delete("pokemonType");
+
     newParams.set("hp", `${hpRange[0]}-${hpRange[1]}`);
-  
-    if (name) { 
-      newParams.set("name", name); 
-    } else { 
-      newParams.delete("name"); 
-    }
+    if (name) newParams.set("name", name);
+    else newParams.delete("name");
 
     newParams.set("sort", sort);
     newParams.set("sortOrder", sortOrder);
-  
+
     if (newParams.toString() !== searchParams.toString()) {
       setSearchParams(newParams, { replace: true });
     }
-  
     onFilterChange({ rarity, cardType, pokemonType, hpRange, name, sort, sortOrder });
   }, [rarity, cardType, pokemonType, hpRange, name, sort, sortOrder]);
-  
+
   return (
     <div className="filters-container">
       <div className="filter-item">
         <span>Search Name:</span>
-        <Input 
-          placeholder="Enter card name" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-        />
+        <Input placeholder="Enter card name" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
 
       <div className="filter-item">
         <span>Rarity:</span>
-        <Select
-          mode="multiple"
-          placeholder="Select Rarity"
-          value={rarity}
-          onChange={setRarity}
-          className="filter-select"
-        >
+        <Select mode="multiple" placeholder="Select Rarity" value={rarity} onChange={setRarity} className="filter-select">
           <Select.Option value="Common">Common</Select.Option>
           <Select.Option value="Uncommon">Uncommon</Select.Option>
           <Select.Option value="Rare">Rare</Select.Option>
@@ -111,22 +87,12 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
 
       <div className="filter-item">
         <span>HP Range:</span>
-        <Slider
-          range
-          min={0}
-          max={300}
-          value={hpRange}
-          onChange={(value) => setHpRange(value as [number, number])}
-        />
+        <Slider range min={0} max={300} value={hpRange} onChange={(value) => setHpRange(value as [number, number])} />
       </div>
 
       <div className="filter-item">
         <span>Sort By:</span>
-        <Select
-          value={sort}
-          onChange={setSort}
-          className="filter-select"
-        >
+        <Select value={sort} onChange={setSort} className="filter-select">
           <Select.Option value="name">Name</Select.Option>
           <Select.Option value="hp">HP</Select.Option>
           <Select.Option value="rarity">Rarity</Select.Option>
@@ -135,11 +101,7 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
 
       <div className="filter-item">
         <span>Sort Order:</span>
-        <Select
-          value={sortOrder}
-          onChange={setSortOrder}
-          className="filter-select"
-        >
+        <Select value={sortOrder} onChange={setSortOrder} className="filter-select">
           <Select.Option value="asc">Ascending</Select.Option>
           <Select.Option value="desc">Descending</Select.Option>
         </Select>

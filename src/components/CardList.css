@@ -1,15 +1,30 @@
 .card-list-container {
-    min-height: 300px; /* Prevents the layout from shrinking */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-  }
-  
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-item {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Empty State */
 .empty-state {
-    font-size: 18px;
-    font-weight: 500;
-    color: #666;
-    margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* Pagination Styling */
+.ant-pagination {
+  margin-top: 16px;
 }
