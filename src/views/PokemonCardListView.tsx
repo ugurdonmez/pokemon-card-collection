@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../store/loadingSlice';
 import CardList from '@components/CardList';
-import CardListFilters from '../components/CardListFilters';
+import CardListFilters from '@components/CardListFilters';
 import { PokemonCard } from '@types';
 
 const PokemonCardListView: React.FC = () => {

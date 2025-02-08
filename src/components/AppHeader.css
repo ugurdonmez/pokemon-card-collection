@@ -12,7 +12,7 @@
   
   /* Logo / Title styling */
   .header-logo {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
     color: #ff9800;
     font-family: "Arial", sans-serif;
@@ -34,13 +34,13 @@
     margin: 0 0.5em;
     cursor: pointer;
     transition: color 0.3s ease;
-    font-size: large;
+    font-size: 24px;
   }
   
   /* Hover and active states */
   .menu-item:hover,
   .menu-item.is-active {
-    color: #ff6a00; /* Change color on hover or active state */
-    text-decoration: none; /* Ensure no underline */
+    color: #ff6a00;
+    text-decoration: none;
   }
   
