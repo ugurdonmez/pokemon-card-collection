@@ -118,49 +118,31 @@ const SummaryPage: React.FC = () => {
 
   const sectionsData = [
     {
-      title: '🎴 Welcome to Ash’s Pokémon Card Collection!',
       text: <IntroSection totalCards={totalCards} rarityCounts={rarityCounts} strongestPokemons={strongestPokemons} />,
-      chart: null,
     },
     {
-      title: '🃏 Understanding Pokémon Rarity',
       text: <RaritySection rarityCounts={rarityCounts} />,
-      chart: null,
     },
     {
-      title: '💪 What is HP (Health Points)?',
       text: <HPDistributionSection hpBuckets={hpBuckets} />,
-      chart: null,
     },
     {
-      title: '📚 What are Pokémon Card Types?',
       text: <CardTypesSection typeCounts={typeCounts} />,
-      chart: null,
     },
     {
-      title: '🔥 Ash’s Strongest Pokémon',
       text: <StrongestPokemonSection strongestPokemons={strongestPokemons} />,
-      chart: null,
     },
     {
-      title: '⚔️ Attack Damage Explained',
       text: <AttackDamageSection damageBuckets={damageBuckets} />,
-      chart: null,
     },
     {
-      title: '📦 Collection Summary',
       text: <CollectionSummarySection totalCards={totalCards} />,
-      chart: null,
     },
     {
-      title: '🌊 Pokémon Types',
       text: <PokemonTypesSection pokemonTypeCounts={pokemonTypeCounts} />,
-      chart: null,
     },
     {
-      title: '📊 HP Distribution by Pokémon Types',
       text: <PokemonTypesHPBoxplotSection pokemonData={pokemonData} />,
-      chart: null,
     },
   ];
 
@@ -183,7 +165,6 @@ const SummaryPage: React.FC = () => {
       <div className="viewport">
         <AnimatePresence mode="wait">
           <motion.section key={currentSection} className="summary-section">
-            {/* <h2>{sectionsData[currentSection].title}</h2> */}
             <div>{sectionsData[currentSection].text}</div>
           </motion.section>
         </AnimatePresence>

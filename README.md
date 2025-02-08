@@ -18,7 +18,12 @@ Future work
 - fix github action to deploy gh-pages when commit to main
 - cannot filter to energy in the list
 - inline css
+- update favicon
+- update seo information
+- responsive desing (I have )
 
+
+https://echarts.apache.org/examples/en/
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
