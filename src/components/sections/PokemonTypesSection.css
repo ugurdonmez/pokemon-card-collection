@@ -1,0 +1,60 @@
+.pokemon-types-section {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #444;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .section-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .pokemon-types-section {
+      padding: 20px;
+    }
+  
+    .section-title {
+      font-size: 1.8rem;
+    }
+  
+    .section-description {
+      font-size: 1rem;
+    }
+  }
+  
