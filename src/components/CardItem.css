@@ -1,90 +1,111 @@
+/* Main Card Styles */
 .card-container {
-    border-radius: 12px;
+    border-radius: 8px; /* Slightly rounded corners */
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    background: white;
-    width: 350px;
-    margin: 16px;
+    background: #fff;
+    margin: 12px; /* Reduced margin for compact grid spacing */
+    width: 280px; /* Compact card width */
+    display: flex;
+    flex-direction: column;
 }
 
 .card-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px); /* Subtle hover lift */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
 .card-image {
     width: 100%;
-    height: 200px;
+    height: 180px; /* Maintain aspect ratio for images */
     object-fit: contain;
-    background-color: #f8f8f8;
-    border-bottom: 2px solid #ddd;
+    background-color: #f8f8f8; /* Neutral background for empty images */
 }
 
+/* Card Content */
 .card-content {
-    padding: 12px;
-    text-align: center;
+    padding: 10px 14px; /* Compact padding for content */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Consistent spacing between sections */
+    flex-grow: 1; /* Ensure content fills the card dynamically */
 }
 
+/* Title */
 .card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 8px;
+    font-size: 18px; /* Slightly smaller font for compact look */
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
 }
 
+/* Subheader for Rarity and HP */
 .card-subheader {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
 }
 
 .card-types {
     display: flex;
     justify-content: center;
     gap: 6px;
-    margin-bottom: 10px;
 }
 
-.card-attacks h4, 
-.card-stats h4 {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 4px;
+/* Stats Section */
+.card-stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    gap: 8px;
+    padding: 0;
+}
+
+.weakness-section,
+.resistance-section {
+    flex: 1; /* Equal space distribution */
     text-align: center;
+}
+
+/* Attacks */
+.card-attacks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.card-attacks h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .card-attacks p {
-    font-size: 14px;
-    margin-bottom: 4px;
+    font-size: 13px;
+    margin: 0;
 }
-
-.card-stats {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 8px 0;
-}
-
-.weakness-section, .resistance-section {
-    text-align: center;
-}
-
-/* Type Colors */
-.type-fire { background: #f08030 !important; color: white !important; }
-.type-water { background: #6890f0 !important; color: white !important; }
-.type-electric { background: #f8d030 !important; color: black !important; }
-.type-grass { background: #78c850 !important; color: white !important; }
-.type-psychic { background: #f85888 !important; color: white !important; }
-.type-fighting { background: #c03028 !important; color: white !important; }
-.type-dark { background: #705848 !important; color: white !important; }
-.type-fairy { background: #ee99ac !important; color: white !important; }
 
 /* Flavor Text */
 .flavor-text {
     font-style: italic;
-    font-size: 14px;
+    font-size: 13px;
     color: #555;
     text-align: center;
     margin-top: 10px;
 }
+
+/* Type Colors */
+.type-fire { background: #f08030; color: white; }
+.type-water { background: #6890f0; color: white; }
+.type-electric { background: #f8d030; color: black; }
+.type-grass { background: #78c850; color: white; }
+.type-psychic { background: #f85888; color: white; }
+.type-fighting { background: #c03028; color: white; }
+.type-dark { background: #705848; color: white; }
+.type-fairy { background: #ee99ac; color: white; }

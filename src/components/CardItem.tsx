@@ -11,6 +11,7 @@ const CardItem: React.FC<CardItemProps> = ({ pokemonCard }) => {
     return (
         <Card
             className="card-container"
+            bodyStyle={{ padding: '0' }} /* Remove default padding */
             cover={<img alt={pokemonCard.name} src={pokemonCard.images.large} className="card-image" />}
         >
             <div className="card-content">
@@ -32,12 +33,10 @@ const CardItem: React.FC<CardItemProps> = ({ pokemonCard }) => {
                 )}
 
                 {/* Evolution Info */}
-                <div className="evolution-info">
-                    {pokemonCard.evolvesFrom && <p>Evolves from: <strong>{pokemonCard.evolvesFrom}</strong></p>}
-                    {pokemonCard.evolvesTo && pokemonCard.evolvesTo.length > 0 && (
-                        <p>Evolves to: {pokemonCard.evolvesTo.join(', ')}</p>
-                    )}
-                </div>
+                {pokemonCard.evolvesFrom && <p>Evolves from: <strong>{pokemonCard.evolvesFrom}</strong></p>}
+                {pokemonCard.evolvesTo && pokemonCard.evolvesTo.length > 0 && (
+                    <p>Evolves to: {pokemonCard.evolvesTo.join(', ')}</p>
+                )}
 
                 {/* Attacks */}
                 {pokemonCard.attacks && pokemonCard.attacks.length > 0 && (
