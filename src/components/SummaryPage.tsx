@@ -9,7 +9,7 @@ import HPDistributionSection from '@components/sections/HPDistributionSection';
 import CardTypesSection from '@components/sections/CardTypesSection';
 import AttackDamageSection from '@components/sections/AttackDamageSection';
 import PokemonTypesSection from '@components/sections/PokemonTypesSection';
-import PokemonTypesHPBoxplotSection from '@components/sections/PokemonTypesHPBoxplotSection';
+import PokemonHPBoxplotSection from '@components/sections/PokemonHPBoxplotSection';
 
 // Define Types
 interface PokemonCard {
@@ -140,7 +140,7 @@ const SummaryPage: React.FC = () => {
       text: <PokemonTypesSection pokemonTypeCounts={pokemonTypeCounts} />,
     },
     {
-      text: <PokemonTypesHPBoxplotSection pokemonData={pokemonData} />,
+      text: <PokemonHPBoxplotSection pokemonData={pokemonData} />,
     },
   ];
 
