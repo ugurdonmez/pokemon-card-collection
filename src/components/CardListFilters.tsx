@@ -92,7 +92,7 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
 
       <div className="filter-item">
         <span>Sort By:</span>
-        <Select value={sort} onChange={setSort} className="filter-select">
+        <Select value={sort} onChange={setSort}>
           <Select.Option value="name">Name</Select.Option>
           <Select.Option value="hp">HP</Select.Option>
           <Select.Option value="rarity">Rarity</Select.Option>
@@ -101,7 +101,7 @@ const CardListFilters: React.FC<CardListFiltersProps> = ({ onFilterChange }) => 
 
       <div className="filter-item">
         <span>Sort Order:</span>
-        <Select value={sortOrder} onChange={setSortOrder} className="filter-select">
+        <Select value={sortOrder} onChange={setSortOrder} >
           <Select.Option value="asc">Ascending</Select.Option>
           <Select.Option value="desc">Descending</Select.Option>
         </Select>
