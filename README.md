@@ -21,9 +21,12 @@ Future work
 - update favicon
 - update seo information
 - responsive desing (I have quite wide screen so I usualy work the done in w:1600px h:1600px, I do not have time to fix small screen)
+- RaritySection.tsx // TODO: fix the space between chart and title
+
 
 
 https://echarts.apache.org/examples/en/
+https://echarts.apache.org/en/option.html#title
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 

@@ -22,7 +22,10 @@ const RaritySection: React.FC<RaritySectionProps> = ({ rarityCounts }) => {
     title: {
       text: 'Pokémon Rarity Distribution',
       left: 'center',
-      textStyle: { fontSize: 20, color: '#333' },
+      textStyle: { fontSize: 20, color: '#333' },    
+      // TODO: fix the space between chart and title  
+      padding: [0, 0, 40, 0],
+      top: -1,
     },
     tooltip: {
       trigger: 'item',
