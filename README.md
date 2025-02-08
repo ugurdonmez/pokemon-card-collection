@@ -19,3 +19,5 @@ Future work
 https://echarts.apache.org/examples/en/
 https://echarts.apache.org/en/option.html#title
 
+docker build -t pokemon-card-collection .
+docker run -p 80:80 pokemon-card-collection
