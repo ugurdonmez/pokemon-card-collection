@@ -21,3 +21,8 @@ https://echarts.apache.org/en/option.html#title
 
 docker build -t pokemon-card-collection .
 docker run -p 80:80 pokemon-card-collection
+
+
+
+docker-compose build
+docker-compose up
