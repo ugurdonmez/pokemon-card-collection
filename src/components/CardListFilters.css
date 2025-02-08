@@ -23,20 +23,6 @@
   border-color: #1890ff;
 }
 
-/* Slider Styling */
-.hp-slider-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.ant-slider {
-  width: 90%;
-  margin-top: 10px;
-}
-
-/* Improved Checkbox & Radio Buttons */
 .ant-checkbox-wrapper,
 .ant-radio-button-wrapper {
   font-size: 14px;
