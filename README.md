@@ -20,7 +20,7 @@ Future work
 - inline css
 - update favicon
 - update seo information
-- responsive desing (I have )
+- responsive desing (I have quite wide screen so I usualy work the done in w:1600px h:1600px, I do not have time to fix small screen)
 
 
 https://echarts.apache.org/examples/en/
