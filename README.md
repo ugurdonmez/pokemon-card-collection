@@ -15,6 +15,55 @@ This project is hosted on **GitHub Pages**. You can access the live version of t
 2. Make sure the `homepage` field in `package.json` is set to:
 
 
+## Features
+
+1. **Interactive Presentation**:
+   - You can start a small presentation under the "Collection" section in the header (requires manual navigation).
+    ![Interactive Presentation](assets/collection_ss1.png "Collection")
+
+2. **Chart Navigation**:
+   - After exploring each chart, you can click the **Next** button to proceed to the next section.
+   - You can navigate back using the **Previous** button or the browser's back button.
+   ![Navigation](assets/buttons_ss3.png "Navigation")
+
+3. **Interactive Chart Filtering**:
+   - Click on any portion of a chart to navigate to the card section, which will be pre-filtered based on your selection.
+   - For example:
+     - Clicking "Water" in the Pokémon Types Distribution chart will display all water Pokémon cards owned by Ash.
+    ![Clicking](assets/dist_ss2.png "Clicking")
+
+4. **Card Filtering Options**:
+   - Filter cards based on different criteria, such as rarity, type, and HP range.
+    ![Filter](assets/filter_ss7.png "Filter")
+
+5. **Search Functionality**:
+   - Search for specific Pokémon cards by name.
+
+6. **Sorting Options**:
+   - Sort cards by:
+     - **Name**
+     - **HP**
+     - **Rarity**
+   - Sorting can be done in **ascending** or **descending** order.
+    ![Sorting](assets/sort_ss4.png "Sorting")
+
+
+7. **Card Details**:
+   - Click on any card to view detailed information about it in a modal.
+    ![Info](assets/info_modal_ss5.png "Info")
+
+
+8. **Pagination**:
+   - Navigate through the card list using pagination at the bottom of the page.
+    ![Pagination](assets/pagination_ss6.png "Pagination")
+
+
+---
+
+These features make the application intuitive and user-friendly, offering a seamless way to explore Ash's Pokémon card collection interactively!
+
+
+
 ## Prerequisites
 
 Before starting, ensure you have the following installed:
@@ -22,9 +71,10 @@ Before starting, ensure you have the following installed:
 - **Node.js**: v23+ (for `yarn` to work properly)
 - **Yarn**: Latest stable version
 - **Docker**: If you prefer containerized deployment
-- **Git**: To clone the repository
+- **Git**: To clone the repository 
 
 ---
+
 
 ## Technologies Used
 
