@@ -14,6 +14,25 @@ This project is hosted on **GitHub Pages**. You can access the live version of t
 1. The app is deployed to the `gh-pages` branch via GitHub Actions.
 2. Make sure the `homepage` field in `package.json` is set to:
 
+---
+
+
+## Notes on Chart and Filtering Features
+
+In my experience, it is crucial to provide the ability to share charts and filtering states. This feature allows users to easily:
+
+- Share specific charts or filtered results via platforms like **Slack**.
+- Add direct links to specific filters or charts in documentation tools like **Confluence** or other collaborative platforms.
+
+### Implementation
+This capability has been carefully considered and implemented during development to ensure:
+- **Deep Linking**: Charts and filtering states are reflected in the URL, making them sharable.
+- **Reproducibility**: Shared links always lead to the same filtered data or chart view, ensuring consistency.
+
+This makes the application not just a tool for exploration but also a resource for collaboration and documentation within teams.
+
+---
+
 
 ## Features
 
@@ -61,14 +80,15 @@ This project is hosted on **GitHub Pages**. You can access the live version of t
 
 8. **Pagination**:
    - Navigate through the card list using pagination at the bottom of the page.
-   
-    ![Pagination](assets/pagination_ss6.png "Pagination")
 
+    ![Pagination](assets/pagination_ss6.png "Pagination")
 
 ---
 
+
 These features make the application intuitive and user-friendly, offering a seamless way to explore Ash's Pokémon card collection interactively!
 
+---
 
 
 ## Prerequisites
