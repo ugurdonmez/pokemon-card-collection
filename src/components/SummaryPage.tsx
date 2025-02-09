@@ -110,6 +110,9 @@ const SummaryPage: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const section = params.get('section');
     if (section && sections.includes(section)) {
+
+      console.log('section in param', section);
+
       setCurrentSection(sections.indexOf(section));
     }
   }, [location.search]);
@@ -127,15 +130,9 @@ const SummaryPage: React.FC = () => {
     {
       text: <HPDistributionSection hpBuckets={hpBuckets} />,
     },
-    // {
-    //   text: <StrongestPokemonSection strongestPokemons={strongestPokemons} />,
-    // },
     {
       text: <AttackDamageSection damageBuckets={damageBuckets} />,
     },
-    // {
-    //   text: <CollectionSummarySection totalCards={totalCards} />,
-    // },
     {
       text: <PokemonTypesSection pokemonTypeCounts={pokemonTypeCounts} />,
     },
