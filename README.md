@@ -166,8 +166,6 @@ Before starting, ensure you have the following installed:
 
 ### UI Enhancements
 - **Better UI**: Improve the overall look and feel.
-- **Unit test**: Fix screen.getByText error why running unit test (config error).
-- **Test coverage**: Increase test covarege to do refactoring easily.
 - **Responsive Design**: Currently optimized for wide screens (1600px width). Needs adjustments for smaller screens.
 - **Custom or Ant Design**: Finalize between fully custom styles or sticking to Ant Design. (Would have used Tailwind if more time was available.)
 - **Fix Chart Issues**: Address spacing issues, such as in `RaritySection.tsx`.
@@ -181,7 +179,9 @@ Before starting, ensure you have the following installed:
 - **Better Typing**: Improve TypeScript typing across the project.
 - **Fix Path Imports**: Normalize imports (e.g., `@` vs `.`).
 - **Inline CSS**: Minimize and fix instances of inline CSS.
-- **Unit Test**: Add more unit tests
+- **Unit Test**: Add more unit tests. Fix screen.getByText error why running unit test (config error).
+- **Test coverage**: Increase test covarege to do refactoring easily.
+
 
 ### Deployment
 - **GitHub Actions**: Automate deployment to GitHub Pages on commits to `main`.
