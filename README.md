@@ -166,13 +166,15 @@ Before starting, ensure you have the following installed:
 
 ### UI Enhancements
 - **Better UI**: Improve the overall look and feel.
+- **Unit test**: Fix screen.getByText error why running unit test (config error).
+- **Test coverage**: Increase test covarege to do refactoring easily.
 - **Responsive Design**: Currently optimized for wide screens (1600px width). Needs adjustments for smaller screens.
 - **Custom or Ant Design**: Finalize between fully custom styles or sticking to Ant Design. (Would have used Tailwind if more time was available.)
 - **Fix Chart Issues**: Address spacing issues, such as in `RaritySection.tsx`.
 
 ### Functionality Improvements
 - **Filter Fixes**: Resolve filtering issues, e.g., cannot filter to "Energy" in the card list.
-- **Boxplot Navigation Error**: Fix the navigation bug in the boxplot section.
+- **Boxplot Navigation Error**: Fix the navigation bug in the boxplot section (should be fixed).
 
 ### Technical Updates
 - **Linting**: Add or fix the linter configuration.
